@@ -70,7 +70,7 @@ router.route('/vids/delete/:id').get((req, res) => {
 	});
 });
 
-mongoose.connect('mongodb://dev:dev123@ds125953.mlab.com:25953/perpetualshred')
+mongoose.connect('mongodb://dev:dev123@ds125953.mlab.com:25953/perpetualshred', { useNewUrlParser: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
 	console.log('MongoDB database connection established');
