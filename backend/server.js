@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-// models
+
 import Vid from './models/Vid';
 
 const app = express();
@@ -10,6 +10,14 @@ const router = express.Router();
 
 app.use(cors());
 app.use(bodyParser.json());
+
+mongoose.connect('mongodb://dev:dev123@ds125953.mlab.com:25953/perpetualshred');
+
+const connection = mongoose.connection;
+
+connection.once('open', () => {
+	console.log('MongoDB database connection established successfully!');
+});
 
 router.route('/vids').get((req, res) => {
 	Vid.find((err, vids) => {
@@ -21,16 +29,15 @@ router.route('/vids').get((req, res) => {
 });
 
 router.route('/vids/:id').get((req, res) => {
-	Issue.findById(req.params.id, (err, vid) => {
+	Vid.findById(req.params.id, (err, vid) => {
 		if (err)
 			console.log(err);
 		else
 			res.json(vid);
-	})
+	});
 });
 
 router.route('/vids/add').post((req, res) => {
-	console.log(req.body);
 	let vid = new Vid(req.body);
 	vid.save()
 		.then(vid => {
@@ -44,12 +51,12 @@ router.route('/vids/add').post((req, res) => {
 router.route('/vids/update/:id').post((req, res) => {
 	Vid.findById(req.params.id, (err, vid) => {
 		if (!vid)
-			return next(new Error('Could not load Vid'));
+			return next(new Error('Could not load document'));
 		else {
 			vid.title = req.body.title;
 			vid.description = req.body.description;
 			vid.origin = req.body.origin;
-			vid.date = req.body.date;
+			vid.releaseDate = req.body.releaseDate;
 			vid.url = req.body.url;
 
 			vid.save().then(vid => {
@@ -66,15 +73,10 @@ router.route('/vids/delete/:id').get((req, res) => {
 		if (err)
 			res.json(err);
 		else
-			res.json('Removed successfully');
-	});
-});
-
-mongoose.connect('mongodb://dev:dev123@ds125953.mlab.com:25953/perpetualshred', { useNewUrlParser: true });
-const connection = mongoose.connection;
-connection.once('open', () => {
-	console.log('MongoDB database connection established');
-});
+			res.json('Remove successfully');
+	})
+})
 
 app.use('/', router);
-app.listen(4000, () => console.log('Express server running on localhost:4000'));
+
+app.listen(4000, () => console.log('Express server running on port 4000'));

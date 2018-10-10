@@ -12,7 +12,7 @@ let Vid = new Schema({
 	origin: {
 		type: String
 	},
-	date: {
+	releaseDate: {
 		type: String
 	},
 	url: {
