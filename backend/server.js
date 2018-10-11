@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import { psConnectionString } from './login';
 
 import Vid from './models/Vid';
 
@@ -11,7 +12,7 @@ const router = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://dev:dev123@ds125953.mlab.com:25953/perpetualshred');
+mongoose.connect(psConnectionString);
 
 const connection = mongoose.connection;
 
