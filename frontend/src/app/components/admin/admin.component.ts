@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 
-import { Vid } from '../../vid.model';
-import { VidService } from '../../vid.service';
+import { Vid } from '../../models/vid.model';
+import { VidService } from '../../services/vid.service';
 
 @Component({
-	selector: 'app-list',
-	templateUrl: './list.component.html',
-	styleUrls: ['./list.component.css']
+	selector: 'app-admin',
+	templateUrl: './admin.component.html',
+	styleUrls: ['./admin.component.css']
 })
-export class ListComponent implements OnInit {
+export class AdminComponent implements OnInit {
 
 	vids: Vid[];
 	displayedColumns = ['title', 'description', 'origin', 'releaseDate', 'url', 'actions'];

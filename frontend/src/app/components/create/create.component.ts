@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { VidService } from '../../vid.service';
+import { VidService } from '../../services/vid.service';
 
 @Component({
 	selector: 'app-create',
