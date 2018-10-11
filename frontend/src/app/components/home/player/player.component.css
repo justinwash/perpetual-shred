@@ -1,0 +1,10 @@
+.player-content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+}
+
+.url-test {
+  text-align: center;
+}
