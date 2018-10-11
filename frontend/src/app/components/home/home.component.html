@@ -1,0 +1,10 @@
+<mat-drawer-container class="home-container" [hasBackdrop]="false">
+  <mat-drawer #sidebar class="sidebar-container" #drawer opened="true" mode="over" position="end">
+    <button class="sidebar-inner-button" mat-button (click)="closeSidebar()">= ></button>
+    <app-sidebar [vid]="currentVid"></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content class="body-container">
+    <app-player [vid]="currentVid"></app-player>
+    <button class="sidebar-outer-button" mat-button (click)="drawer.toggle()">=</button>
+  </mat-drawer-content>
+</mat-drawer-container>
