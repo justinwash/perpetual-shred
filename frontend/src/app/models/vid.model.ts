@@ -1,8 +1,8 @@
 export interface Vid {
-	id: String;
-	title: String;
-	description: String;
-	origin: String;
-	releaseDate: String;
-	url: String;
+	id: string;
+	title: string;
+	description: string;
+	origin: string;
+	releaseDate: string;
+	url: string;
 }
