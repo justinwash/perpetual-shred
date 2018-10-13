@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('sidebar') sidebar: MatSidenav;
   vids: Vid[];
   currentVid: Vid;
+  sidebarOpen: boolean = true;
 
   constructor(private vidService: VidService) { }
 
@@ -21,6 +22,12 @@ export class HomeComponent implements OnInit {
 
   closeSidebar() {
     this.sidebar.close();
+    this.sidebarOpen = false;
+  }
+
+  openSidebar() {
+    this.sidebar.open();
+    this.sidebarOpen = true;
   }
 
   fetchVids() {
