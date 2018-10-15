@@ -26,9 +26,10 @@ import { CreateComponent } from './components/create/create.component';
 import { EditComponent } from './components/edit/edit.component';
 import { HomeComponent } from './components/home/home.component';
 import { PlayerComponent } from './components/home/player/player.component';
+import { SidebarComponent } from './components/home/sidebar/sidebar.component';
 
 import { VidService } from './services/vid.service';
-import { SidebarComponent } from './components/home/sidebar/sidebar.component';
+import { YouTubeService } from './services/youtube.service';
 
 const routes: Routes = [
   { path: 'create', component: CreateComponent },
@@ -45,7 +46,7 @@ const routes: Routes = [
     EditComponent,
     HomeComponent,
     PlayerComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +67,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatSidenavModule
   ],
-  providers: [VidService],
+  providers: [VidService, YouTubeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

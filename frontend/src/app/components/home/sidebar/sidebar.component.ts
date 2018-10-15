@@ -8,9 +8,20 @@ import { Vid } from 'src/app/models/vid.model';
 })
 export class SidebarComponent implements OnInit {
   @Input() vid: Vid;
+  originName: string;
   constructor() { }
 
   ngOnInit() {
+    this.originName = this.getOriginDisplayName(this.vid.url);
   }
 
+  getOriginDisplayName(url: string) {
+    if(url.includes('youtube'))
+      return 'YouTube';
+    if(url.includes('pinkbike'))
+      return 'PinkBike';
+    if(url.includes('vimeo'))
+      return 'Vimeo';  
+    else return url;
+  }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Vid } from '../models/vid.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,15 @@ export class VidService {
 
   deleteVid(id) {
     return this.http.get(`${this.uri}/vids/delete/${id}`);
+  }
+
+  getPlayerType(url: string){
+      if(url.includes('youtube'))
+        return 'youtube';
+      if(url.includes('pinkbike'))
+        return 'pinkbike';
+      if(url.includes('vimeo'))
+        return 'vimeo';  
+      else return url;
   }
 }
