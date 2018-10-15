@@ -1,4 +1,59 @@
 .sidebar-content {
-  padding-top: 40px;
-  padding-left: 10px;
+    padding: 20px;
+    padding-top: 16px;
+}
+
+.sidebar-title {
+    font-family: serif;
+    font-size: 42px;
+    letter-spacing: -0.3px;
+    line-height: 0.9;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    margin-bottom: 20px;
+}
+
+.sidebar-description-header {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    margin-bottom: 6px;
+}
+
+.sidebar-description {
+    font-size: 18px;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    margin-bottom: 20px;
+}
+
+.sidebar-origin {
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    font-size: medium;
+}
+
+.sidebar-origin-container mat-icon {
+    font-size: 18px;
+    transform: translateY(3px)
+}
+
+.sidebar-origin-header {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    margin-bottom: 2px;
+}
+
+.sidebar-actions {
+    width: 100%;
+    top: 18px;
+    right: 56px;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.sidebar-actions mat-icon {
+    font-size: 36px;
+    margin-right: 16px;
 }

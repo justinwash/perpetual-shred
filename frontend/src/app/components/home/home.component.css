@@ -6,11 +6,9 @@
 }
 
 .sidebar-container {
-    width: 30vw;
-    max-width: 300px;
+    width: 320px;
     background-color: rgba(105, 33, 33, 0.7);
     color: white;
-    font-family: serif;
 }
 
 .sidebar-toggle-button {
