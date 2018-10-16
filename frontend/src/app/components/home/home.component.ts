@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
       .getVids()
       .subscribe((data: Vid[]) => {
         this.vids = data;
-        this.currentVid = data[0]; // Need a randomizer function
+        this.currentVid = data[1]; // Need a randomizer function
         console.log('Data requested ...');
         console.log(this.vids);
       });
