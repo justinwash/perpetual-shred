@@ -46,6 +46,7 @@
 }
 
 .sidebar-actions {
+    display: flex;
     width: 100%;
     top: 18px;
     right: 56px;
@@ -56,4 +57,8 @@
 .sidebar-actions mat-icon {
     font-size: 36px;
     margin-right: 16px;
+}
+
+.sidebar-action-button:hover {
+    cursor: pointer;
 }

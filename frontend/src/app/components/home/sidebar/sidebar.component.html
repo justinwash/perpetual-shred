@@ -4,7 +4,9 @@
             <mat-icon *ngIf="!favorited">favorite_border</mat-icon>
             <mat-icon *ngIf="favorited">favorite</mat-icon>
         </div>
-        <mat-icon>share</mat-icon>
+        <div class="sidebar-action-button">
+            <mat-icon>share</mat-icon>
+        </div>
     </div>
     <div class="sidebar-title">
         {{ vid.title }}
