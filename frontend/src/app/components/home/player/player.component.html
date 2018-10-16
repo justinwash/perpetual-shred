@@ -1,4 +1,5 @@
-<div *ngIf="vid" class="player">
-    <iframe id="player" [src]="safeVidUrl" width="100%" height="100%" frameborder="0"></iframe>
+<div *ngIf="player" class="player">
+    <div *ngIf="player.type === 'youtube'" id="player" class="youtube-player"></div>
+    <div *ngIf="player.type === 'vimeo'" id="player" class="vimeo-player"></div>
+    <div *ngIf="player.type === 'pinkbike'" id="player" class="pinkbike-player"></div>
 </div>
-<button (click)="stopVid()">stop</button>

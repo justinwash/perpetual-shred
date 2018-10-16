@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Vid } from '../../../models/vid.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { VidService } from '../../../services/vid.service';
-import { YouTubeService } from '../../../services/youtube.service';
+import { YouTubePlayer } from '../../../models/youtube-player.model';
 
 @Component({
   selector: 'app-player',
@@ -13,33 +13,14 @@ export class PlayerComponent implements OnInit {
   @Input() vid: Vid;
   player: any;
   playerType: string;
-  safeVidUrl: SafeResourceUrl;
   constructor(private sanitizer: DomSanitizer,
-              private vidService: VidService,
-              private ytService: YouTubeService) { }
+              private vidService: VidService) { }
 
   ngAfterViewInit() {
   }
 
   ngOnInit() {
     this.playerType = this.vidService.getPlayerType(this.vid.url);
-    this.safeVidUrl = this.buildSafeVidUrl(this.vid.url);
-    this.createYouTubePlayer(this.vid);
-  }
-
-  buildSafeVidUrl(url: string) {
-    if(this.playerType === 'youtube')
-      return this.sanitizer.bypassSecurityTrustResourceUrl(url + '?autoplay=1&enablejsapi=1');
-  }
-
-  createYouTubePlayer(vid: Vid){
-    this.ytService.initializeYoutubeApi();
-    (<any>window).onYouTubeIframeAPIReady = () => {
-      this.player = new (<any>window).YT.Player('player');
-      console.log(this.player);
-    }
-  }
-  stopVid() {
-    this.player.stopVideo();
+    this.player = new YouTubePlayer(this.vid, this.sanitizer);
   }
 }
