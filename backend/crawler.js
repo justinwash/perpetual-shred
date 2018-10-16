@@ -6,11 +6,14 @@ const crawler = {
     crawl() {
         var url = 'https://www.pinkbike.com/news/videos/';
 
-        request(url, function(error, response, html) {
+        request(url, function (error, response, html) {
             if (!error) {
                 var $ = cheerio.load(html);
-                var vids = [];
-                console.log(vids)
+                var links = [];
+                $('a[class="f22 fgrey4 bold"]').each(function (index, element) {
+                    links.push($(element).attr('href'));
+                });
+                console.log(links)
             } else {
                 return response.toJSON();
             }
