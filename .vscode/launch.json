@@ -1,19 +1,17 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Launch Firefox",
-        "type": "firefox",
-        "request": "launch",
-        "url": "http://localhost:4200/",
-        "webRoot": "${workspaceFolder}"
-      },
-      {
-        "name": "Attach Firefox",
-        "type": "firefox",
-        "request": "attach",
-        "url": "http://localhost:4200/",
-        "webRoot": "${workspaceFolder}"
-      }
-    ]
-  }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/backend",
+      "name": "Debug Backend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 9229
+    },
+  ]
+}
