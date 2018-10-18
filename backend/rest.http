@@ -1,0 +1,5 @@
+#### Start Crawler
+http://localhost:4000/scrape
+
+#### Get all vids
+http://localhost:4000/vids
