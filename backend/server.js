@@ -3,12 +3,13 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import { psConnectionString } from './login';
-import crawler from './crawler';
+import Crawler from './crawler';
 
 import Vid from './models/Vid';
 
 const app = express();
 const router = express.Router();
+const crawler = new Crawler();
 
 app.use(cors());
 app.use(bodyParser.json());
