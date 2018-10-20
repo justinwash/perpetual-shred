@@ -3,46 +3,67 @@ import cheerio from 'cheerio';
 import Vid from './models/Vid';
 import 'babel-polyfill';
 
-class Crawler {
-    crawl() {
+class PinkBikeCrawler {
+    async crawl() {
         var home = 'https://www.pinkbike.com/news/videos/';
-        this.getNewsUrls(home);
+        var newsUrls = await this.getNewsUrls(home);
+        console.log(newsUrls);
+        var vidUrls = await this.compileVids(newsUrls);
+        console.log(vidUrls);
     }
 
-    getNewsUrls(home) {
-        var crawler = this;
-        request(home, function (error, response, html) {
-            if (!error) {
-                var $ = cheerio.load(html);
-                var newsUrls = [];
-                $('a[class="f22 fgrey4 bold"]').each(function (index, element) {
-                    newsUrls.push($(element).attr('href'));
-                });
-                console.log('Pages returned from /news/videos:');
-                console.log(newsUrls);
-                crawler.getVidUrls(newsUrls);
-            } else {
-                return response.toJSON();
-            }
+    getNewsUrls(url) {
+        return new Promise(function (resolve) {
+            request(url, function (error, response, html) {
+                if (!error) {
+                    var $ = cheerio.load(html);
+                    var newsUrls = [];
+                    $('a[class="f22 fgrey4 bold"]').each(function (index, element) {
+                        newsUrls.push($(element).attr('href'));
+                    });
+                    resolve(newsUrls);
+                }
+                else {
+                    console.log(response);
+                }
+            });
         });
     }
 
-    getVidUrls(newsUrls) {
-        newsUrls.forEach((newsUrl) => {
+    compileVids(newsUrls) {
+        var crawler = this;
+        return new Promise(async function (resolve) {
+            var allVids = [];
+            var vidsByPage = await Promise.all(newsUrls.map(await crawler.getVidInfo));
+            for (const group of vidsByPage) {
+                allVids = allVids.concat(group);
+            }
+            resolve(allVids);
+        });
+
+    }
+
+    getVidInfo(newsUrl) {
+        return new Promise(function (resolve) {
             request(newsUrl, function (error, response, html) {
                 if (!error) {
                     var $ = cheerio.load(html);
-                    var vidUrls = [];
+                    var vids = [];
                     $('iframe[src*="youtube.com"]').each(function (index, element) {
-                        vidUrls.push($(element).attr('src'));
+                        var vid = new Vid({
+                            url: $(element).attr('src'),
+                            origin: newsUrl
+                        });
+                        vids.push(vid);
                     });
-                    console.log(vidUrls);
-                } else {
-                    return response.toJSON();
+                    resolve(vids);
+                }
+                else {
+                    console.log(response);
                 }
             });
         });
     }
 }
 
-export default Crawler;
+export default PinkBikeCrawler;
