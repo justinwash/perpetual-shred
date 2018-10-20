@@ -9,7 +9,7 @@ import Vid from './models/Vid';
 
 const app = express();
 const router = express.Router();
-const crawler = new Crawler();
+const _pbc = new Crawler();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -80,8 +80,8 @@ router.route('/vids/delete/:id').get((req, res) => {
     });
 });
 
-router.route('/scrape').get((req, res) => {
-    crawler.crawl();
+router.route('/crawl').get((req, res) => {
+    _pbc.crawl();
     res.json('Crawler started')
 });
 
