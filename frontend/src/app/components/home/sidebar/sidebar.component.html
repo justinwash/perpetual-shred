@@ -11,7 +11,7 @@
     <div class="sidebar-title">
         {{ vid.title }}
     </div>
-    <div class="sidebar-description-container">
+    <div *ngIf="vid.description != ''" class="sidebar-description-container">
         <div class="sidebar-description-header">
             DESCRIPTION
         </div>
@@ -21,7 +21,8 @@
     </div>
     <div class="sidebar-origin-container">
         <div class="sidebar-origin">
-            <mat-icon>videocam</mat-icon>{{ originName }}
+            <mat-icon>videocam</mat-icon><a class="sidebar-origin-link" href="{{vid.origin}}" target="_blank">{{
+                originName }}</a>
         </div>
         <div class="sidebar-releaseDate">
             <mat-icon>today</mat-icon>{{ vid.releaseDate }}

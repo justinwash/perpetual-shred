@@ -12,16 +12,16 @@ export class SidebarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.originName = this.getOriginDisplayName(this.vid.url);
+    this.originName = this.getOriginDisplayName(this.vid.origin);
   }
 
   getOriginDisplayName(url: string) {
-    if(url.includes('youtube'))
+    if (url.includes('youtube'))
       return 'YouTube';
-    if(url.includes('pinkbike'))
+    if (url.includes('pinkbike'))
       return 'PinkBike';
-    if(url.includes('vimeo'))
-      return 'Vimeo';  
+    if (url.includes('vimeo'))
+      return 'Vimeo';
     else return url;
   }
 }

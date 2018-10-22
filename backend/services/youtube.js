@@ -1,6 +1,4 @@
 import { google } from 'googleapis';
-import { Vid } from '../models/Vid';
-import { promises } from 'fs';
 import 'babel-polyfill';
 
 const _youtube = google.youtube({
