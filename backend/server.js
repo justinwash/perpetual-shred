@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import { psConnectionString } from './login';
-import Crawler from './crawler';
+import Crawler from './pinkbike-crawler';
 
 import Vid from './models/Vid';
 
