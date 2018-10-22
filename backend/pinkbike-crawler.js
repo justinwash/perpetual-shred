@@ -1,15 +1,18 @@
 import request from 'request';
 import cheerio from 'cheerio';
 import Vid from './models/Vid';
+import tempVid from './models/tempVid';
+import YoutubeService from './services/youtube'
 import 'babel-polyfill';
 
+const _yt = new YoutubeService();
 class PinkBikeCrawler {
     async crawl() {
         var home = 'https://www.pinkbike.com/news/videos/';
         var newsUrls = await this.getNewsUrls(home);
-        console.log(newsUrls);
-        var vidUrls = await this.compileVids(newsUrls);
-        console.log(vidUrls);
+        var vids = await this.compileYoutubeVids(newsUrls);
+        vids = await this.populateYoutubeInfo(vids);
+        console.log(vids);
     }
 
     getNewsUrls(url) {
@@ -30,11 +33,11 @@ class PinkBikeCrawler {
         });
     }
 
-    compileVids(newsUrls) {
+    compileYoutubeVids(newsUrls) {
         var crawler = this;
         return new Promise(async function (resolve) {
             var allVids = [];
-            var vidsByPage = await Promise.all(newsUrls.map(await crawler.getVidInfo));
+            var vidsByPage = await Promise.all(newsUrls.map(await crawler.getYoutubeVids));
             for (const group of vidsByPage) {
                 allVids = allVids.concat(group);
             }
@@ -43,17 +46,16 @@ class PinkBikeCrawler {
 
     }
 
-    getVidInfo(newsUrl) {
+    getYoutubeVids(newsUrl) {
         return new Promise(function (resolve) {
             request(newsUrl, function (error, response, html) {
                 if (!error) {
                     var $ = cheerio.load(html);
                     var vids = [];
                     $('iframe[src*="youtube.com"]').each(function (index, element) {
-                        var vid = new Vid({
-                            url: $(element).attr('src'),
-                            origin: newsUrl
-                        });
+                        var vid = new Vid();
+                        vid.url = $(element).attr('src')
+                        vid.origin = newsUrl
                         vids.push(vid);
                     });
                     resolve(vids);
@@ -64,6 +66,20 @@ class PinkBikeCrawler {
             });
         });
     }
+
+    async populateYoutubeInfo(vids) {
+        for (const vid of vids) {
+            var info = await _yt.getYoutubeInfo(vid);
+            if (info.description.length > 400)
+                info.description = info.description.substring(0, 400) + '...';
+
+            vid.description = info.description;
+            vid.title = info.title;
+            vid.releaseDate = info.publishedAt.substring(0, 10);
+        }
+        return vids;
+    }
 }
+
 
 export default PinkBikeCrawler;

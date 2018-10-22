@@ -7,7 +7,6 @@ let Vid = new Schema({
 		type: String
 	},
 	description: {
-		type: String
 	},
 	origin: {
 		type: String
