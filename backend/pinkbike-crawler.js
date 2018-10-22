@@ -1,18 +1,23 @@
 import request from 'request';
 import cheerio from 'cheerio';
 import Vid from './models/Vid';
-import tempVid from './models/tempVid';
 import YoutubeService from './services/youtube'
+
+import VidService from './services/vidservice';
+
 import 'babel-polyfill';
 
 const _yt = new YoutubeService();
+const _vs = new VidService();
+
 class PinkBikeCrawler {
     async crawl() {
         var home = 'https://www.pinkbike.com/news/videos/';
         var newsUrls = await this.getNewsUrls(home);
         var vids = await this.compileYoutubeVids(newsUrls);
         vids = await this.populateYoutubeInfo(vids);
-        console.log(vids);
+        _vs.addVids(await vids);
+
     }
 
     getNewsUrls(url) {
@@ -79,6 +84,7 @@ class PinkBikeCrawler {
         }
         return vids;
     }
+
 }
 
 

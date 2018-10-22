@@ -62,3 +62,8 @@
 .sidebar-action-button:hover {
     cursor: pointer;
 }
+
+.sidebar-origin-link {
+    color: white;
+    text-decoration: none;
+}

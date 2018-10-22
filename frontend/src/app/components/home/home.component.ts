@@ -35,10 +35,21 @@ export class HomeComponent implements OnInit {
       .getVids()
       .subscribe((data: Vid[]) => {
         this.vids = data;
-        this.currentVid = data[1]; // Need a randomizer function
+        this.selectRandomVid();
         console.log('Data requested ...');
         console.log(this.vids);
       });
+  }
+
+  selectRandomVid() {
+    var randomId = this.getRandomInt(0, this.vids.length);
+    this.currentVid = this.vids[randomId];
+  }
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
 
 }
