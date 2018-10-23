@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Vid } from '../../models/vid.model';
 import { VidService } from '../../services/vid.service';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +14,9 @@ export class HomeComponent implements OnInit {
   vids: Vid[];
   currentVid: Vid;
   sidebarOpen: boolean = true;
+  playerReference: any;
 
-  constructor(private vidService: VidService) { }
+  constructor(private vidService: VidService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.fetchVids();
@@ -50,6 +52,11 @@ export class HomeComponent implements OnInit {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+  }
+
+  setPlayerReference(event) {
+    this.playerReference = event;
+    this.cd.detectChanges();
   }
 
 }

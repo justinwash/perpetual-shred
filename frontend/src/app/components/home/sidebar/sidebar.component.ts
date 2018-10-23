@@ -8,6 +8,7 @@ import { Vid } from 'src/app/models/vid.model';
 })
 export class SidebarComponent implements OnInit {
   @Input() vid: Vid;
+  @Input() playerReference: any;
   originName: string;
   constructor() { }
 
@@ -23,5 +24,13 @@ export class SidebarComponent implements OnInit {
     if (url.includes('vimeo'))
       return 'Vimeo';
     else return url;
+  }
+
+  pauseVid() {
+    this.playerReference.controller.pauseVideo();
+  }
+
+  playVid() {
+    this.playerReference.controller.playVideo();
   }
 }

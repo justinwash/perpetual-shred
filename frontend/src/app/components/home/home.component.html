@@ -3,10 +3,10 @@
         <div *ngIf="sidebarOpen" class="sidebar-toggle-button" (click)="closeSidebar()">
             <mat-icon>arrow_forward</mat-icon>
         </div>
-        <app-sidebar [vid]="currentVid"></app-sidebar>
+        <app-sidebar [vid]="currentVid" [playerReference]="playerReference"></app-sidebar>
     </mat-drawer>
     <mat-drawer-content class="body-container">
-        <app-player [vid]="currentVid"></app-player>
+        <app-player [vid]="currentVid" (playerReference)="setPlayerReference($event)"></app-player>
         <div *ngIf="!sidebarOpen" class="sidebar-toggle-button" (click)="openSidebar()">
             <mat-icon>menu</mat-icon>
         </div>
