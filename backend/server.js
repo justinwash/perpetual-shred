@@ -9,6 +9,7 @@ import './config/passport';
 import vidsRouter from './routes/vids';
 import crawlRouter from './routes/crawl';
 import userRouter from './routes/user';
+import adminRouter from './routes/admin';
 
 import { appDb, userDb } from './config/mongoose';
 
@@ -30,5 +31,6 @@ app.use(passport.initialize());
 app.use('/vids', vidsRouter);
 app.use('/crawl', crawlRouter);
 app.use('/user', userRouter);
+app.use('/admin', adminRouter);
 
 app.listen(4000, () => console.log('Express server running on port 4000'));
