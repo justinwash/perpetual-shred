@@ -83,14 +83,12 @@ export class AuthenticationService {
 		}
 	}
 
-	public isAdmin(): boolean {
-		console.log('WHY');
-		var result = null;
+	public isAdmin() {
 		axios.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${this.getToken()}` } })
 			.then(res => {
-				result = res.data
+				console.log(res.data);
+				return res.data;
 			});
-		return result;
 	}
 }
 
