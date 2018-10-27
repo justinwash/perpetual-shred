@@ -1,1 +1,1 @@
-# Perpetual Shred, but MEAN
+# Perpetual Shred, but MEANer
