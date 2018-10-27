@@ -14,7 +14,7 @@ let User = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	role: String,
+	role: Number,
 	prefs: {},
 	hash: String,
 	salt: String,

@@ -33,16 +33,18 @@ import { VidService } from './services/vid.service';
 import { YouTubeService } from './services/youtube.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/authguard.service';
+import { AdminGuardService } from './services/adminguard.service';
 
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
 
 
 
+
 const routes: Routes = [
 	{ path: 'create', component: CreateComponent },
 	{ path: 'edit/:id', component: EditComponent },
-	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
+	{ path: 'admin', component: AdminComponent, canActivate: [AdminGuardService] },
 	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'register', component: RegisterComponent },
@@ -80,7 +82,7 @@ const routes: Routes = [
 		MatSidenavModule,
 		FormsModule
 	],
-	providers: [VidService, YouTubeService, AuthenticationService, AuthGuardService],
+	providers: [VidService, YouTubeService, AuthenticationService, AuthGuardService, AdminGuardService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
