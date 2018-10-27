@@ -1,8 +1,7 @@
+import { appDb } from '../config/mongoose';
 import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
-
-let Vid = new Schema({
+let Vid = appDb.model('Vid', new mongoose.Schema({
 	title: {
 		type: String
 	},
@@ -17,6 +16,6 @@ let Vid = new Schema({
 	url: {
 		type: String
 	}
-});
+}));
 
-export default mongoose.model('Vid', Vid);
+export default appDb.model('Vid', Vid.schema);

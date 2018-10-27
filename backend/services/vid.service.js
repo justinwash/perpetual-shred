@@ -18,8 +18,10 @@ class VidService {
 
 	addVids(vids) {
 		for (const vid of vids) {
-			console.log(vid);
-			axios.post(`${uri}/vids/add`, vid);
+			if ((vid.description !== undefined) && (vid.description !== undefined)) {
+				console.log(vid);
+				axios.post(`${uri}/vids/add`, vid);
+			}
 		}
 	}
 

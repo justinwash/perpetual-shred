@@ -3,3 +3,6 @@ http://localhost:4000/crawl
 
 #### Get all vids
 http://localhost:4000/vids
+
+#### Get User Profile
+get http://localhost:4000/admin/is
