@@ -48,7 +48,7 @@ export class AuthenticationService {
 		this.token = token;
 	}
 
-	private getToken(): string {
+	public getToken(): string {
 		if (!this.token) {
 			this.token = localStorage.getItem('mean-token');
 			console.log(this.token);
@@ -81,14 +81,6 @@ export class AuthenticationService {
 		} else {
 			return false;
 		}
-	}
-
-	public isAdmin() {
-		axios.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${this.getToken()}` } })
-			.then(res => {
-				console.log(res.data);
-				return res.data;
-			});
 	}
 }
 
