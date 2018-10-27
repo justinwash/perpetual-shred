@@ -2,6 +2,14 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Debug Frontend",
+			"type": "firefox",
+			"request": "launch",
+			"reAttach": true,
+			"url": "http://localhost/4200",
+			"webRoot": "${workspaceFolder}/frontend"
+		},
+		{
 			"type": "node",
 			"request": "launch",
 			"cwd": "${workspaceFolder}/backend",

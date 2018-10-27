@@ -5,7 +5,7 @@ const _pbc = new Crawler();
 
 const crawlRouter = express.Router();
 
-crawlRouter.route('/crawl').get((req, res) => {
+crawlRouter.route('/').get((req, res) => {
 	_pbc.crawl();
 	res.json('Crawler started')
 });
