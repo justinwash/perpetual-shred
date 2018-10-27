@@ -85,9 +85,12 @@ export class AuthenticationService {
 
 	public isAdmin(): boolean {
 		console.log('WHY');
-		var res = this.http.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${this.getToken()}` } });
-		console.log(res);
-		return true;
+		var result = null;
+		axios.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${this.getToken()}` } })
+			.then(res => {
+				result = res.data
+			});
+		return result;
 	}
 }
 
