@@ -1,90 +1,34 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import { psConnectionString } from './login';
-import Crawler from './pinkbike-crawler';
 
-import Vid from './models/Vid';
+import passport from 'passport';
+import './models/User';
+import './config/passport';
+
+import vidsRouter from './routes/vids';
+import crawlRouter from './routes/crawl';
+import userRouter from './routes/user';
+
+import { appDb, userDb } from './config/mongoose';
 
 const app = express();
-const router = express.Router();
-const _pbc = new Crawler();
+
 
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect(psConnectionString);
-
-const connection = mongoose.connection;
-
-connection.once('open', () => {
-    console.log('MongoDB database connection established successfully!');
+appDb.once('open', () => {
+	console.log('Application database connection established successfully!');
 });
 
-router.route('/vids').get((req, res) => {
-    Vid.find((err, vids) => {
-        if (err)
-            console.log(err);
-        else
-            res.json(vids);
-    });
+userDb.once('open', () => {
+	console.log('User database connection established successfully!');
 });
 
-router.route('/vids/:id').get((req, res) => {
-    Vid.findById(req.params.id, (err, vid) => {
-        if (err)
-            console.log(err);
-        else
-            res.json(vid);
-    });
-});
-
-router.route('/vids/add').post((req, res) => {
-    let vid = new Vid(req.body);
-    vid.save()
-        .then(vid => {
-            res.status(200).json({ 'vid': 'Added successfully' });
-        })
-        .catch(err => {
-            res.status(400).send('Failed to create new record');
-        });
-});
-
-router.route('/vids/update/:id').post((req, res) => {
-    Vid.findById(req.params.id, (err, vid) => {
-        if (!vid)
-            return next(new Error('Could not load document'));
-        else {
-            vid.title = req.body.title;
-            vid.description = req.body.description;
-            vid.origin = req.body.origin;
-            vid.releaseDate = req.body.releaseDate;
-            vid.url = req.body.url;
-
-            vid.save().then(vid => {
-                res.json('Update done');
-            }).catch(err => {
-                res.status(400).send('Update failed');
-            });
-        }
-    });
-});
-
-router.route('/vids/delete/:id').get((req, res) => {
-    Vid.findByIdAndRemove({ _id: req.params.id }, (err, vid) => {
-        if (err)
-            res.json(err);
-        else
-            res.json('Remove successfully');
-    });
-});
-
-router.route('/crawl').get((req, res) => {
-    _pbc.crawl();
-    res.json('Crawler started')
-});
-
-app.use('/', router);
+app.use(passport.initialize());
+app.use('/vids', vidsRouter);
+app.use('/crawl', crawlRouter);
+app.use('/user', userRouter);
 
 app.listen(4000, () => console.log('Express server running on port 4000'));

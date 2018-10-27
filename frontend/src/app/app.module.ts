@@ -3,20 +3,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import {
-  MatToolbarModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatOptionModule,
-  MatSelectModule,
-  MatIconModule,
-  MatButtonModule,
-  MatCardModule,
-  MatTableModule,
-  MatDividerModule,
-  MatSnackBarModule,
-  MatSidenavModule
+	MatToolbarModule,
+	MatFormFieldModule,
+	MatInputModule,
+	MatOptionModule,
+	MatSelectModule,
+	MatIconModule,
+	MatButtonModule,
+	MatCardModule,
+	MatTableModule,
+	MatDividerModule,
+	MatSnackBarModule,
+	MatSidenavModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -30,44 +31,56 @@ import { SidebarComponent } from './components/home/sidebar/sidebar.component';
 
 import { VidService } from './services/vid.service';
 import { YouTubeService } from './services/youtube.service';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthGuardService } from './services/authguard.service';
+
+import { RegisterComponent } from './components/auth/register/register.component';
+import { LoginComponent } from './components/auth/login/login.component';
+
+
 
 const routes: Routes = [
-  { path: 'create', component: CreateComponent },
-  { path: 'edit/:id', component: EditComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: '', component: HomeComponent }
+	{ path: 'create', component: CreateComponent },
+	{ path: 'edit/:id', component: EditComponent },
+	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
+	{ path: '', component: HomeComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AdminComponent,
-    CreateComponent,
-    EditComponent,
-    HomeComponent,
-    PlayerComponent,
-    SidebarComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes),
-    ReactiveFormsModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatTableModule,
-    MatDividerModule,
-    MatSnackBarModule,
-    MatSidenavModule
-  ],
-  providers: [VidService, YouTubeService],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		AdminComponent,
+		CreateComponent,
+		EditComponent,
+		HomeComponent,
+		PlayerComponent,
+		SidebarComponent,
+		RegisterComponent,
+		LoginComponent,
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		RouterModule.forRoot(routes),
+		ReactiveFormsModule,
+		MatToolbarModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatOptionModule,
+		MatSelectModule,
+		MatIconModule,
+		MatButtonModule,
+		MatCardModule,
+		MatTableModule,
+		MatDividerModule,
+		MatSnackBarModule,
+		MatSidenavModule,
+		FormsModule
+	],
+	providers: [VidService, YouTubeService, AuthenticationService, AuthGuardService],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

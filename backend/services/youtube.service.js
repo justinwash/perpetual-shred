@@ -1,9 +1,10 @@
 import { google } from 'googleapis';
 import 'babel-polyfill';
+import { googleApiKey } from '../config/login';
 
 const _youtube = google.youtube({
 	version: 'v3',
-	auth: 'AIzaSyBV0CufWBbF7O1J6Y27kw5Tmmbcwj5t1Ho'
+	auth: googleApiKey
 });
 
 class YoutubeService {
@@ -15,7 +16,9 @@ class YoutubeService {
 				part: 'snippet',
 				id: yt.parseYouTubeId(vid.url)
 			});
-			resolve(res.data.items[0].snippet);
+			if (res.data.items.length > 0)
+				resolve(res.data.items[0].snippet);
+			else resolve(null);
 		});
 	}
 
