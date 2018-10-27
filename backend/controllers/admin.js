@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 const AdminController = {};
 
 AdminController.authenticate = function (req, res) {
-	console.log(req);
 	// If no user ID exists in the JWT return a 401
 	if (!req.payload._id) {
 		res.status(401).json({
