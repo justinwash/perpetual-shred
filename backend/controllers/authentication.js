@@ -9,7 +9,7 @@ AuthenticationController.register = function (req, res) {
 
 	user.name = req.body.name;
 	user.email = req.body.email;
-	user.role = 0;
+	user.role = 1;
 	user.setPassword(req.body.password);
 
 	user.save(function (err) {
