@@ -11,7 +11,7 @@ export class AuthenticationService {
 
 	constructor(private http: HttpClient, private router: Router) { }
 
-	private request(method: 'post' | 'get', type: 'login' | 'register' | 'profile' | 'isAdmin', user?: TokenPayload): Observable<any> {
+	private request(method: 'post' | 'get', type: 'login' | 'register' | 'profile', user?: TokenPayload): Observable<any> {
 		let base;
 
 		if (method === 'post') {
