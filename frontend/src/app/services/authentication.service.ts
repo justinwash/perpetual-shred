@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
+import axios from 'axios';
 
 @Injectable()
 export class AuthenticationService {
@@ -47,9 +48,10 @@ export class AuthenticationService {
 		this.token = token;
 	}
 
-	private getToken(): string {
+	public getToken(): string {
 		if (!this.token) {
 			this.token = localStorage.getItem('mean-token');
+			console.log(this.token);
 		}
 		return this.token;
 	}

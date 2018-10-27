@@ -10,3 +10,8 @@ table {
 	position: absolute;
 	right: 10px;
 }
+
+.admin-home-button {
+	position: absolute;
+	right: 110px;
+}

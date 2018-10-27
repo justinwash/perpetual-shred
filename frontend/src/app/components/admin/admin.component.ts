@@ -46,4 +46,8 @@ export class AdminComponent implements OnInit {
 		this.auth.logout();
 	}
 
+	goHome() {
+		this.router.navigateByUrl('/');
+	}
+
 }
