@@ -16,7 +16,8 @@ export class RegisterComponent {
 
 	register() {
 		this.auth.register(this.credentials).subscribe(() => {
-			this.router.navigateByUrl('/profile');
+			//TODO route to profile page, create dat
+			this.router.navigateByUrl('/');
 		}, (err) => {
 			console.error(err);
 		});
