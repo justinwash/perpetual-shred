@@ -40,6 +40,7 @@ export class AuthenticationService {
 	}
 
 	public profile(): Observable<any> {
+		console.log(this.request('get', 'profile'));
 		return this.request('get', 'profile');
 	}
 

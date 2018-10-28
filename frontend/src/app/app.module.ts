@@ -37,7 +37,7 @@ import { AdminGuardService } from './services/adminguard.service';
 
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
-
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -48,6 +48,7 @@ const routes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'register', component: RegisterComponent },
+	{ path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({
@@ -61,6 +62,7 @@ const routes: Routes = [
 		SidebarComponent,
 		RegisterComponent,
 		LoginComponent,
+		ProfileComponent,
 	],
 	imports: [
 		BrowserModule,
