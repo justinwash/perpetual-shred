@@ -28,6 +28,12 @@
             <mat-icon>today</mat-icon>{{ vid.releaseDate }}
         </div>
     </div>
-    <button (click)="playVid()">PLAY</button>
-    <button (click)="pauseVid()">PAUSE</button>
+    <div class="player-actions">
+        <div class="sidebar-action-button" (click)="playVid()">
+            <mat-icon>play_arrow</mat-icon>
+        </div>
+        <div class="sidebar-action-button" (click)="pauseVid()">
+            <mat-icon>pause</mat-icon>
+        </div>
+    </div>
 </div>

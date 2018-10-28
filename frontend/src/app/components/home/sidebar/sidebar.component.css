@@ -67,3 +67,12 @@
     color: white;
     text-decoration: none;
 }
+
+.player-actions {
+    position: absolute;
+    display: flex;
+    bottom: 8px;
+    right: 30px;
+    color: white;
+    margin-bottom: 16px;
+}
