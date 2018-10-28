@@ -13,6 +13,5 @@ const auth = jwt({
 userRouter.get('/profile', auth, ProfileController.profileRead);
 userRouter.post('/login', AuthenticationController.login);
 userRouter.post('/register', AuthenticationController.register);
-userRouter.get('/isAdmin', AuthenticationController.isAdmin);
 
 export default userRouter;
