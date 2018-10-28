@@ -1,0 +1,28 @@
+.register-page-root {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.register-page-container {
+	height: calc(100vh - 64px);
+	display: grid;
+	align-items: center;
+	width: 312px;
+}
+
+.register-form-container {
+	width: 256px;
+}
+
+.mat-form-field {
+	width: 100%;
+}
+
+.register-form-button-row {
+	display: grid;
+}
+
+.mat-raised-button {
+	margin: 5px;
+}
