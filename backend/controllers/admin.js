@@ -17,7 +17,7 @@ AdminController.authenticate = function (req, res) {
 			.exec(function (err, user) {
 				if (user.role === 0)
 					res.status(200).json(true);
-				else res.status(401).json(false)
+				else res.status(200).json(false)
 			});
 	}
 };
