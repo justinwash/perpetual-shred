@@ -1,39 +1,39 @@
 <div class="sidebar-content">
-    <div class="sidebar-actions">
-        <div class="sidebar-action-button">
-            <mat-icon *ngIf="!favorited">favorite_border</mat-icon>
-            <mat-icon *ngIf="favorited">favorite</mat-icon>
-        </div>
-        <div class="sidebar-action-button">
-            <mat-icon>share</mat-icon>
-        </div>
-    </div>
-    <div class="sidebar-title">
-        {{ vid.title }}
-    </div>
-    <div *ngIf="vid.description != ''" class="sidebar-description-container">
-        <div class="sidebar-description-header">
-            DESCRIPTION
-        </div>
-        <div class="sidebar-description">
-            {{ vid.description }}
-        </div>
-    </div>
-    <div class="sidebar-origin-container">
-        <div class="sidebar-origin">
-            <mat-icon>videocam</mat-icon><a class="sidebar-origin-link" href="{{vid.origin}}" target="_blank">{{
-                originName }}</a>
-        </div>
-        <div class="sidebar-releaseDate">
-            <mat-icon>today</mat-icon>{{ vid.releaseDate }}
-        </div>
-    </div>
-    <div class="player-actions">
-        <div class="sidebar-action-button" (click)="playVid()">
-            <mat-icon>play_arrow</mat-icon>
-        </div>
-        <div class="sidebar-action-button" (click)="pauseVid()">
-            <mat-icon>pause</mat-icon>
-        </div>
-    </div>
+	<div class="sidebar-actions">
+		<div class="sidebar-action-button">
+			<mat-icon *ngIf="!favorited" (click)="saveFav()">favorite_border</mat-icon>
+			<mat-icon *ngIf="favorited">favorite</mat-icon>
+		</div>
+		<div class="sidebar-action-button">
+			<mat-icon>share</mat-icon>
+		</div>
+	</div>
+	<div class="sidebar-title">
+		{{ vid.title }}
+	</div>
+	<div *ngIf="vid.description != ''" class="sidebar-description-container">
+		<div class="sidebar-description-header">
+			DESCRIPTION
+		</div>
+		<div class="sidebar-description">
+			{{ vid.description }}
+		</div>
+	</div>
+	<div class="sidebar-origin-container">
+		<div class="sidebar-origin">
+			<mat-icon>videocam</mat-icon><a class="sidebar-origin-link" href="{{vid.origin}}" target="_blank">{{
+				originName }}</a>
+		</div>
+		<div class="sidebar-releaseDate">
+			<mat-icon>today</mat-icon>{{ vid.releaseDate }}
+		</div>
+	</div>
+	<div class="player-actions">
+		<div class="sidebar-action-button" (click)="playVid()">
+			<mat-icon>play_arrow</mat-icon>
+		</div>
+		<div class="sidebar-action-button" (click)="pauseVid()">
+			<mat-icon>pause</mat-icon>
+		</div>
+	</div>
 </div>

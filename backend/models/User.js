@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import { userDb } from '../config/mongoose';
 import { userSecret } from '../config/login';
+import Vid from './Vid';
 
 let User = new mongoose.Schema({
 	email: {
@@ -16,6 +17,7 @@ let User = new mongoose.Schema({
 	},
 	role: Number,
 	prefs: {},
+	favs: [],
 	hash: String,
 	salt: String,
 });
@@ -40,6 +42,7 @@ User.methods.generateJwt = function () {
 		name: this.name,
 		role: this.role,
 		prefs: this.prefs,
+		favs: this.favs,
 		exp: parseInt(expiry.getTime() / 1000),
 	}, userSecret);
 };
