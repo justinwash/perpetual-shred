@@ -15,5 +15,6 @@ userRouter.get('/profile', auth, ProfileController.profileRead);
 userRouter.post('/login', AuthenticationController.login);
 userRouter.post('/register', AuthenticationController.register);
 userRouter.post('/favs/save', FavController.save);
+userRouter.post('/favs/check', FavController.check);
 
 export default userRouter;

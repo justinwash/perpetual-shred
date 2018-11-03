@@ -11,10 +11,13 @@ export class SidebarComponent implements OnInit {
 	@Input() vid: Vid;
 	@Input() playerReference: any;
 	originName: string;
+	favorited: boolean;
+
 	constructor(private favService: FavService) { }
 
-	ngOnInit() {
+	async ngOnInit() {
 		this.originName = this.getOriginDisplayName(this.vid.origin);
+		this.favorited = await this.isFavorited(this.vid);
 	}
 
 	getOriginDisplayName(url: string) {
@@ -37,5 +40,10 @@ export class SidebarComponent implements OnInit {
 
 	saveFav() {
 		this.favService.saveFav(this.vid);
+		this.favorited = this.isFavorited(this.vid);
+	}
+
+	isFavorited(vid: Vid): any {
+		return this.favService.checkFav(this.vid);
 	}
 }

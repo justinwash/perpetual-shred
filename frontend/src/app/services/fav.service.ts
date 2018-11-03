@@ -23,4 +23,16 @@ export class FavService {
 			}
 		}
 	}
+
+	async checkFav(vid: Vid) {
+		if (this.auth.isLoggedIn()) {
+			var token = this.auth.getToken();
+			var result = await axios.post(`${this.uri}/user/favs/check`, { userId: this.auth.getUserDetails()._id, vid: vid });
+			if (result.data === true)
+				return true;
+			else {
+				return false;
+			}
+		}
+	}
 }
