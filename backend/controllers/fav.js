@@ -9,6 +9,8 @@ FavController.save = function (req, res) {
 		.findById(req.body.userId)
 		.exec(function (err, user) {
 			user.favs.push(req.body.vid)
+			console.log(user.favs);
+			user.save();
 			res.status(200).json(user);
 		});
 };
