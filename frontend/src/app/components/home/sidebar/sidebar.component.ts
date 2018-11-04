@@ -46,4 +46,9 @@ export class SidebarComponent implements OnInit {
 	isFavorited(vid: Vid): any {
 		return this.favService.checkFav(this.vid);
 	}
+
+	async removeFav() {
+		await this.favService.removeFav(this.vid);
+		this.favorited = await this.isFavorited(this.vid);
+	}
 }

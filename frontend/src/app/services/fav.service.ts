@@ -35,4 +35,16 @@ export class FavService {
 			}
 		}
 	}
+
+	async removeFav(vid: Vid) {
+		if (this.auth.isLoggedIn()) {
+			var token = this.auth.getToken();
+			var result = await axios.post(`${this.uri}/user/favs/remove`, { userId: this.auth.getUserDetails()._id, vid: vid });
+			if (result.data === true)
+				return true;
+			else {
+				return false;
+			}
+		}
+	}
 }
