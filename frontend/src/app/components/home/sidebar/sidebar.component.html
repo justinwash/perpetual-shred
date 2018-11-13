@@ -1,11 +1,11 @@
 <div class="sidebar-content">
 	<div class="sidebar-actions">
 		<div class="sidebar-action-button">
-			<mat-icon *ngIf="!favorited" (click)="saveFav()">favorite_border</mat-icon>
-			<mat-icon *ngIf="favorited" (click)="removeFav()">favorite</mat-icon>
+			<mat-icon matTooltip="Add to favorites" [matTooltipPosition]="'left'" *ngIf="!favorited" (click)="saveFav()">favorite_border</mat-icon>
+			<mat-icon matTooltip="Remove from favorites" [matTooltipPosition]="'left'" *ngIf="favorited" (click)="removeFav()">favorite</mat-icon>
 		</div>
 		<div class="sidebar-action-button">
-			<mat-icon>share</mat-icon>
+			<mat-icon matTooltip="Share this video" [matTooltipPosition]="'right'">share</mat-icon>
 		</div>
 	</div>
 	<div class="sidebar-title">
@@ -29,10 +29,10 @@
 		</div>
 	</div>
 	<div class="player-actions">
-		<div class="sidebar-action-button" (click)="playVid()">
+		<div *ngIf="!playing" class="sidebar-action-button" (click)="playVid()">
 			<mat-icon>play_arrow</mat-icon>
 		</div>
-		<div class="sidebar-action-button" (click)="pauseVid()">
+		<div *ngIf="playing" class="sidebar-action-button" (click)="pauseVid()">
 			<mat-icon>pause</mat-icon>
 		</div>
 	</div>

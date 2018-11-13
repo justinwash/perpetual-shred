@@ -12,6 +12,7 @@ export class SidebarComponent implements OnInit {
 	@Input() playerReference: any;
 	originName: string;
 	favorited: boolean;
+	playing: boolean = true;
 
 	constructor(private favService: FavService) { }
 
@@ -32,10 +33,12 @@ export class SidebarComponent implements OnInit {
 
 	pauseVid() {
 		this.playerReference.controller.pauseVideo();
+		this.playing = false;
 	}
 
 	playVid() {
 		this.playerReference.controller.playVideo();
+		this.playing = true;
 	}
 
 	saveFav() {
