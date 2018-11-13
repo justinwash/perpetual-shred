@@ -51,7 +51,6 @@ export class AuthenticationService {
 	public getToken(): string {
 		if (!this.token) {
 			this.token = localStorage.getItem('mean-token');
-			console.log(this.token);
 		}
 		return this.token;
 	}
@@ -66,9 +65,8 @@ export class AuthenticationService {
 		const token = this.getToken();
 		let payload;
 		if (token) {
-			payload = token.split('.')[1];
-			payload = window.atob(payload);
-			return JSON.parse(payload);
+			console.log(this.parseJwt(token))
+			return this.parseJwt(token);
 		} else {
 			return null;
 		}
@@ -82,6 +80,13 @@ export class AuthenticationService {
 			return false;
 		}
 	}
+
+	public parseJwt(token) {
+		var base64Url = token.split('.')[1];
+		var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+		console.log()
+		return JSON.parse(window.atob(base64));
+	};
 }
 
 export interface UserDetails {

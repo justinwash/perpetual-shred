@@ -14,6 +14,7 @@ export class FavService {
 
 	async saveFav(vid: Vid) {
 		if (this.auth.isLoggedIn()) {
+			console.log(this.auth.isLoggedIn())
 			var token = this.auth.getToken();
 			var result = await axios.post(`${this.uri}/user/favs/save`, { userId: this.auth.getUserDetails()._id, vid: vid });
 			if (result.data === true)

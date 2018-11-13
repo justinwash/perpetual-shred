@@ -15,9 +15,8 @@ FavController.save = function (req, res) {
 FavController.remove = function (req, res) {
 	User.findById(req.body.userId)
 		.exec(function (err, user) {
-			if (user.favs.find(x => x._id === req.body.vid._id) !== undefined) {
-				console.log(user.favs);
-				user.favs.splice(user.favs.find(x => x._id === req.body.vid._id), 1);
+			if (user.favs.find(x => x._id === req.body.vid._id)) {
+				user.favs.remove(user.favs.find(x => x._id === req.body.vid._id));
 				user.save();
 				res.status(200).json(true);
 			}
