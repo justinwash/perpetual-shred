@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CrawlerService } from '../../services/crawler.service';
 
 import { Vid } from '../../models/vid.model';
 import { VidService } from '../../services/vid.service';
@@ -14,9 +15,11 @@ import { VidService } from '../../services/vid.service';
 export class AdminComponent implements OnInit {
 
 	vids: Vid[];
+	crawling: boolean = false;
 	displayedColumns = ['title', 'description', 'origin', 'releaseDate', 'url', 'actions'];
 
-	constructor(private vidService: VidService, private auth: AuthenticationService, private router: Router) { }
+	constructor(private vidService: VidService, private auth: AuthenticationService, 
+		private router: Router, private crawlerService: CrawlerService) { }
 
 	ngOnInit() {
 		this.fetchVids();
@@ -50,4 +53,11 @@ export class AdminComponent implements OnInit {
 		this.router.navigateByUrl('/');
 	}
 
+	crawl() {
+		this.crawling = true;
+		this.crawlerService.crawl().subscribe(() => {
+			this.fetchVids();
+			this.crawling = false;
+		});
+	}
 }

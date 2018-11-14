@@ -17,7 +17,7 @@ class PinkBikeCrawler {
 		var vids = await this.compileYoutubeVids(newsUrls);
 		vids = await this.populateYoutubeInfo(vids);
 		_vs.addVids(await vids);
-
+		return await vids;
 	}
 
 	getNewsUrls(url) {
