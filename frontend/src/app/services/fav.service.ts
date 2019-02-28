@@ -14,12 +14,11 @@ export class FavService {
 
 	async saveFav(vid: Vid) {
 		if (this.auth.isLoggedIn()) {
-			console.log(this.auth.isLoggedIn())
-			var token = this.auth.getToken();
-			var result = await axios.post(`${this.uri}/user/favs/save`, { userId: this.auth.getUserDetails()._id, vid: vid });
-			if (result.data === true)
+			const token = this.auth.getToken();
+			const result = await axios.post(`${this.uri}/user/favs/save`, { userId: this.auth.getUserDetails()._id, vid: vid });
+			if (result.data === true) {
 				return true;
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -27,11 +26,11 @@ export class FavService {
 
 	async checkFav(vid: Vid) {
 		if (this.auth.isLoggedIn()) {
-			var token = this.auth.getToken();
-			var result = await axios.post(`${this.uri}/user/favs/check`, { userId: this.auth.getUserDetails()._id, vid: vid });
-			if (result.data === true)
+			const token = this.auth.getToken();
+			const result = await axios.post(`${this.uri}/user/favs/check`, { userId: this.auth.getUserDetails()._id, vid: vid });
+			if (result.data === true) {
 				return true;
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -39,11 +38,11 @@ export class FavService {
 
 	async removeFav(vid: Vid) {
 		if (this.auth.isLoggedIn()) {
-			var token = this.auth.getToken();
-			var result = await axios.post(`${this.uri}/user/favs/remove`, { userId: this.auth.getUserDetails()._id, vid: vid });
-			if (result.data === true)
+			const token = this.auth.getToken();
+			const result = await axios.post(`${this.uri}/user/favs/remove`, { userId: this.auth.getUserDetails()._id, vid: vid });
+			if (result.data === true) {
 				return true;
-			else {
+			} else {
 				return false;
 			}
 		}

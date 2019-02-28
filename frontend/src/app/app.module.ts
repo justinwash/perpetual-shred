@@ -18,7 +18,8 @@ import {
 	MatTableModule,
 	MatDividerModule,
 	MatSnackBarModule,
-	MatSidenavModule
+	MatSidenavModule,
+	MatSliderModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -39,6 +40,7 @@ import { AdminGuardService } from './services/adminguard.service';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { _MatTabNavMixinBase } from '@angular/material/tabs/typings/tab-nav-bar';
 
 
 
@@ -84,6 +86,7 @@ const routes: Routes = [
 		MatDividerModule,
 		MatSnackBarModule,
 		MatSidenavModule,
+		MatSliderModule,
 		FormsModule
 	],
 	providers: [VidService, YouTubeService, AuthenticationService, AuthGuardService, AdminGuardService],

@@ -63,9 +63,7 @@ export class AuthenticationService {
 
 	public getUserDetails(): UserDetails {
 		const token = this.getToken();
-		let payload;
 		if (token) {
-			console.log(this.parseJwt(token))
 			return this.parseJwt(token);
 		} else {
 			return null;
@@ -82,11 +80,10 @@ export class AuthenticationService {
 	}
 
 	public parseJwt(token) {
-		var base64Url = token.split('.')[1];
-		var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-		console.log()
+		const base64Url = token.split('.')[1];
+		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
 		return JSON.parse(window.atob(base64));
-	};
+	}
 }
 
 export interface UserDetails {

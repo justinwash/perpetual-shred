@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
 	@Input() playerReference: any;
 	originName: string;
 	favorited: boolean;
-	playing: boolean = true;
+	playing = true;
 
 	constructor(private favService: FavService) { }
 
@@ -22,13 +22,15 @@ export class SidebarComponent implements OnInit {
 	}
 
 	getOriginDisplayName(url: string) {
-		if (url.includes('youtube'))
+		if (url.includes('youtube')) {
 			return 'YouTube';
-		if (url.includes('pinkbike'))
+		}
+		if (url.includes('pinkbike')) {
 			return 'PinkBike';
-		if (url.includes('vimeo'))
+		}
+		if (url.includes('vimeo')) {
 			return 'Vimeo';
-		else return url;
+		} else { return url; }
 	}
 
 	pauseVid() {

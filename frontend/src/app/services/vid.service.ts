@@ -29,7 +29,7 @@ export class VidService {
 		return this.http.post(`${this.uri}/vids/add`, vid);
 	}
 
-	updateVid(id, title, description, origin, releaseDate, url) {
+	updateVid(id: String, title: any, description: any, origin: any, releaseDate: any, url: any) {
 		const vid = {
 			title: title,
 			description: description,
@@ -45,12 +45,14 @@ export class VidService {
 	}
 
 	getPlayerType(url: string) {
-		if (url.includes('youtube'))
+		if (url.includes('youtube')) {
 			return 'youtube';
-		if (url.includes('pinkbike'))
+		}
+		if (url.includes('pinkbike')) {
 			return 'pinkbike';
-		if (url.includes('vimeo'))
+		}
+		if (url.includes('vimeo')) {
 			return 'vimeo';
-		else return url;
+		} else { return url; }
 	}
 }
