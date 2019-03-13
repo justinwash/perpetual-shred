@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Vid } from '../../models/vid.model';
 import { VidService } from '../../services/vid.service';
-import { A11yModule } from '@angular/cdk/a11y';
 import { YouTubePlayer } from 'src/app/models/youtube-player.model';
 
 @Component({
@@ -46,6 +45,7 @@ export class HomeComponent implements OnInit {
 		const randomId = this.getRandomInt(0, this.vids.length);
 		this.currentVid = this.vids[randomId];
 		this.cd.detectChanges();
+		window.location.reload();
 	}
 
 	getRandomInt(min: number, max: number) {
