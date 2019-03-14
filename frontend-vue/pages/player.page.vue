@@ -1,5 +1,9 @@
 <template>
+<div>
 	<p>{{ greeting }}</p>
+	<video-player></video-player>
+	<sidebar></sidebar>
+</div>
 </template>
 
 <script>
@@ -8,6 +12,10 @@
 			return {
 				greeting: 'This is the player page'
 			}
+		},
+		components: {
+			'video-player': httpVueLoader('../components/player/video.component.vue'),
+			'sidebar': httpVueLoader('../components/player/sidebar.component.vue')
 		}
 	}
 </script>

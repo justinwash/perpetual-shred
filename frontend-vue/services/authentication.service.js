@@ -1,9 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators/map';
-import axios from 'axios';
+
+import { map } from '../dependencies/rxjs';
+import axios from '../dependencies/axios';
 
 export default class AuthenticationService {
 	token;
@@ -13,12 +10,12 @@ export default class AuthenticationService {
 		let base;
 
 		if (method === 'post') {
-			base = this.http.post(`${this.uri}/user/${type}`, user);
+			base = axios.post(`${this.uri}/user/${type}`, user);
 		} else {
-			base = this.http.get(`${this.uri}/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } });
+			base = axios.get(`${this.uri}/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } });
 		}
 		const request = base.pipe(
-			map((data: TokenResponse) => {
+			map((data) => {
 				if (data.token) {
 					this.saveToken(data.token);
 				}
@@ -28,37 +25,37 @@ export default class AuthenticationService {
 		return request;
 	}
 
-	public register(user: TokenPayload): Observable<any> {
+	register(user) {
 		return this.request('post', 'register', user);
 	}
 
-	public login(user: TokenPayload): Observable<any> {
+	login(user) {
 		return this.request('post', 'login', user);
 	}
 
-	public profile(): Observable<any> {
+	profile() {
 		return this.request('get', 'profile');
 	}
 
-	private saveToken(token: string): void {
+	saveToken(token) {
 		localStorage.setItem('mean-token', token);
 		this.token = token;
 	}
 
-	public getToken(): string {
+	getToken() {
 		if (!this.token) {
 			this.token = localStorage.getItem('mean-token');
 		}
 		return this.token;
 	}
 
-	public logout(): void {
+	logout() {
 		this.token = '';
 		window.localStorage.removeItem('mean-token');
-		this.router.navigateByUrl('/');
+		window.location.replace('/');
 	}
 
-	public getUserDetails(): UserDetails {
+	getUserDetails() {
 		const token = this.getToken();
 		if (token) {
 			return this.parseJwt(token);
@@ -67,7 +64,7 @@ export default class AuthenticationService {
 		}
 	}
 
-	public isLoggedIn(): boolean {
+	isLoggedIn() {
 		const user = this.getUserDetails();
 		if (user) {
 			return user.exp > Date.now() / 1000;
@@ -76,29 +73,29 @@ export default class AuthenticationService {
 		}
 	}
 
-	public parseJwt(token) {
+	parseJwt(token) {
 		const base64Url = token.split('.')[1];
 		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
 		return JSON.parse(window.atob(base64));
 	}
 }
 
-export interface UserDetails {
-	_id: string;
-	email: string;
-	name: string;
-	role: string;
-	exp: number;
-	iat: number;
+export class UserDetails {
+	_id;
+	email;
+	name;
+	role;
+	exp;
+	iat;
 }
 
-interface TokenResponse {
-	token: string;
+export class TokenResponse {
+	token;
 }
 
-export interface TokenPayload {
-	email: string;
-	password: string;
-	name?: string;
+export class TokenPayload {
+	email;
+	password;
+	name;
 }
 

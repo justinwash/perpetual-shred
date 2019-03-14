@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 import axios from 'axios';
 
-@Injectable()
-export class AdminGuardService implements CanActivate {
+
+export default class AdminGuardService {
 	uri = 'http://localhost:4000';
-	constructor(private auth: AuthenticationService, private router: Router) { }
+	auth = new AuthenticationService();
 
 	async canActivate() {
 		const token = this.auth.getToken();
