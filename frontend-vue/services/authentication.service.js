@@ -1,10 +1,11 @@
 
-import { map } from '../dependencies/rxjs';
-import axios from '../dependencies/axios';
+import * as Rx from '../dependencies/rxjs.js';
 
 export default class AuthenticationService {
-	token;
-	uri = 'http://localhost:4000';
+	constructor () {
+		this.token;
+		this.uri = 'http://localhost:4000';
+	}
 
 	request(method /* 'post' | 'get' */, type /* 'login' | 'register' | 'profile' */, user) {
 		let base;
@@ -15,7 +16,7 @@ export default class AuthenticationService {
 			base = axios.get(`${this.uri}/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } });
 		}
 		const request = base.pipe(
-			map((data) => {
+			Rx.operators.map((data) => {
 				if (data.token) {
 					this.saveToken(data.token);
 				}
@@ -81,21 +82,28 @@ export default class AuthenticationService {
 }
 
 export class UserDetails {
-	_id;
-	email;
-	name;
-	role;
-	exp;
-	iat;
+	constructor () {
+		_id;
+		email;
+		name;
+		role;
+		exp;
+		iat;
+	}
+
 }
 
 export class TokenResponse {
-	token;
+	constructor () {
+		token;
+	}
 }
 
 export class TokenPayload {
-	email;
-	password;
-	name;
+	constructor () {
+		email;
+		password;
+		name;
+	}
 }
 
