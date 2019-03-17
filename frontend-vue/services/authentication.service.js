@@ -1,8 +1,5 @@
-
-import * as Rx from '../dependencies/rxjs.js';
-
 export default class AuthenticationService {
-	constructor () {
+	constructor() {
 		this.token;
 		this.uri = 'http://localhost:4000';
 	}
@@ -82,7 +79,7 @@ export default class AuthenticationService {
 }
 
 export class UserDetails {
-	constructor () {
+	constructor() {
 		_id;
 		email;
 		name;
@@ -94,13 +91,13 @@ export class UserDetails {
 }
 
 export class TokenResponse {
-	constructor () {
+	constructor() {
 		token;
 	}
 }
 
 export class TokenPayload {
-	constructor () {
+	constructor() {
 		email;
 		password;
 		name;

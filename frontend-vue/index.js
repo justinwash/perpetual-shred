@@ -1,4 +1,4 @@
-import { AdminGuardService } from './services/adminguard.service.js';
+import AdminGuardService from './services/adminguard.service.js';
 
 const adminGuard = new AdminGuardService();
 

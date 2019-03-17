@@ -1,20 +1,19 @@
 import AuthenticationService from './authentication.service.js';
 
 export default class AdminGuardService {
-	constructor () {
+	constructor() {
 		this.uri = 'http://localhost:4000';
 		this.auth = new AuthenticationService();
 	}
 
-	async canActivate() {
+	canActivate() {
 		const token = this.auth.getToken();
 		if (token !== null) {
-			const isAdmin = await axios.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${token}` } });
-			if (isAdmin) return isAdmin.data;
+			axios.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${token}` } }).then(res => {
+				if (res) return res.data;
+			})
 		} else {
 			return false;
 		}
 	}
 }
-
-module.exports = AdminGuardService;
