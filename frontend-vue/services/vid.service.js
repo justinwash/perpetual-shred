@@ -1,5 +1,3 @@
-import axios from '../dependencies/axios';
-
 export default class VidService {
 	uri = 'http://localhost:4000';
 

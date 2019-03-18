@@ -1,6 +1,5 @@
 import passport from 'passport';
 import Strategy from 'passport-local';
-import mongoose from 'mongoose';
 import User from '../models/User';
 
 passport.use(new Strategy({

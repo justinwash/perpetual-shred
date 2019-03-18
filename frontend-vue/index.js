@@ -1,22 +1,19 @@
-import AdminGuardService from './services/adminguard.service.js';
+import AuthenticationService from './services/authentication.service.js';
 
-const adminGuard = new AdminGuardService();
-
-/* Routing */
+/* Routes */
 const router = new VueRouter({
   routes: [
     { path: '/', component: httpVueLoader('./pages/player.page.vue') },
     { path: '/login', component: httpVueLoader('./pages/login.page.vue') },
-    {
-      path: '/admin', component: httpVueLoader('./pages/admin.page.vue'), beforeEnter: (to, from, next) => {
-        adminGuard.canActivate() ? next() : next('/login')
-      }
-    },
+    { path: '/admin', component: httpVueLoader('./pages/admin.page.vue') },
   ]
 });
 
 /* Create */
-new Vue({
+const app = new Vue({
   router,
-  el: '#app'
+  el: '#app',
 })
+
+/* Assign global services */
+Object.defineProperty(Vue.prototype, '_authenticationService', { value: new AuthenticationService() });

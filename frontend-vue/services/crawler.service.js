@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export default class CrawlerService {
   uri = 'http://localhost:4000';
 

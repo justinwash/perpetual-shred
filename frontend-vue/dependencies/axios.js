@@ -7,7 +7,7 @@
   else if (typeof exports === 'object')
     exports["axios"] = factory();
   else
-    root["axios"] = factory();
+    window.axios = factory();
 })(this, function () {
   return /******/ (function (modules) { // webpackBootstrap
 /******/ 	// The module cache

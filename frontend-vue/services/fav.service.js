@@ -1,5 +1,4 @@
-import { AuthenticationService } from '.authentication.service';
-import axios from 'axios';
+import { AuthenticationService } from '.authentication.service.js';
 
 export default class FavService {
 	uri = 'http://localhost:4000';

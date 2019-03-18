@@ -1,5 +1,5 @@
 export default class AuthenticationService {
-	constructor() {
+	constructor () {
 		this.token;
 		this.uri = 'http://localhost:4000';
 	}
@@ -12,14 +12,13 @@ export default class AuthenticationService {
 		} else {
 			base = axios.get(`${this.uri}/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } });
 		}
-		const request = base.pipe(
-			Rx.operators.map((data) => {
-				if (data.token) {
-					this.saveToken(data.token);
-				}
-				return data;
-			})
-		);
+
+		const request = base.then(res => {
+			if (res.data.token) {
+				this.saveToken(res.data.token);
+			}
+			return data;
+		});
 		return request;
 	}
 
@@ -71,6 +70,17 @@ export default class AuthenticationService {
 		}
 	}
 
+	isAdmin() {
+		const token = this.getToken();
+		if (token !== null) {
+			axios.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${token}` } }).then(res => {
+				if (res) return res.data;
+			})
+		} else {
+			return false;
+		}
+	}
+
 	parseJwt(token) {
 		const base64Url = token.split('.')[1];
 		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -79,7 +89,7 @@ export default class AuthenticationService {
 }
 
 export class UserDetails {
-	constructor() {
+	constructor () {
 		_id;
 		email;
 		name;
@@ -91,13 +101,13 @@ export class UserDetails {
 }
 
 export class TokenResponse {
-	constructor() {
+	constructor () {
 		token;
 	}
 }
 
 export class TokenPayload {
-	constructor() {
+	constructor () {
 		email;
 		password;
 		name;
