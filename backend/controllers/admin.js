@@ -1,6 +1,4 @@
-import passport from 'passport';
 import User from '../models/User';
-import mongoose from 'mongoose';
 
 const AdminController = {};
 

@@ -6,9 +6,9 @@
 
 <script>
 	module.exports = {
-		beforeRouteEnter (to, from, next) {
+		beforeRouteEnter(to, from, next) {
 			next(ref => {
-				ref._authenticationService.isAdmin() ? next() : next('/login')
+				ref._adminService.isAdmin() ? next() : next('/login');
 			})
 		},
 		data: function () {

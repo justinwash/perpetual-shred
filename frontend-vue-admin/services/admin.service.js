@@ -74,6 +74,23 @@ export default class AuthenticationService {
 		}
 	}
 
+	isAdmin() {
+		return true; // remove me!
+
+		const token = this.getToken();
+		let request;
+		if (token !== null) {
+			axios.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${token}` } }).then(res => {
+				if (res) {
+					var result = res.data
+					return result;
+				}
+			})
+		} else {
+			return false;
+		}
+	}
+
 	parseJwt(token) {
 		const base64Url = token.split('.')[1];
 		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

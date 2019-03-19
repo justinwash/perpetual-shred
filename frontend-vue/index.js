@@ -6,7 +6,6 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: httpVueLoader('./pages/player.page.vue') },
     { path: '/login', component: httpVueLoader('./pages/login.page.vue') },
-    { path: '/admin', component: httpVueLoader('./pages/admin.page.vue') },
   ]
 });
 
