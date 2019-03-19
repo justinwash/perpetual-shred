@@ -1,25 +1,29 @@
 export default class AuthenticationService {
-	constructor () {
+	constructor() {
 		this.token;
 		this.uri = 'http://localhost:4000';
 	}
 
 	request(method /* 'post' | 'get' */, type /* 'login' | 'register' | 'profile' */, user) {
-		let base;
+		let request;
 
 		if (method === 'post') {
-			base = axios.post(`${this.uri}/user/${type}`, user);
+			request = axios.post(`${this.uri}/user/${type}`, user).then(res => {
+				if (res.data.token) {
+					this.saveToken(res.data.token);
+				}
+				return res;
+			});
+			return request;
 		} else {
-			base = axios.get(`${this.uri}/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } });
+			request = axios.get(`${this.uri}/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } }).then(res => {
+				if (res.data.token) {
+					this.saveToken(res.data.token);
+				}
+				return res;
+			});
+			return request;
 		}
-
-		const request = base.then(res => {
-			if (res.data.token) {
-				this.saveToken(res.data.token);
-			}
-			return data;
-		});
-		return request;
 	}
 
 	register(user) {
@@ -72,9 +76,13 @@ export default class AuthenticationService {
 
 	isAdmin() {
 		const token = this.getToken();
+		let request;
 		if (token !== null) {
 			axios.get(`${this.uri}/admin/authenticate`, { headers: { Authorization: `Bearer ${token}` } }).then(res => {
-				if (res) return res.data;
+				if (res) {
+					var result = res.data
+					return result;
+				}
 			})
 		} else {
 			return false;
@@ -89,7 +97,7 @@ export default class AuthenticationService {
 }
 
 export class UserDetails {
-	constructor () {
+	constructor() {
 		_id;
 		email;
 		name;
@@ -101,13 +109,13 @@ export class UserDetails {
 }
 
 export class TokenResponse {
-	constructor () {
+	constructor() {
 		token;
 	}
 }
 
 export class TokenPayload {
-	constructor () {
+	constructor() {
 		email;
 		password;
 		name;

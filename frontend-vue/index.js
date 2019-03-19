@@ -1,3 +1,4 @@
+/* Services */
 import AuthenticationService from './services/authentication.service.js';
 
 /* Routes */
@@ -10,9 +11,9 @@ const router = new VueRouter({
 });
 
 /* Create */
-const app = new Vue({
+new Vue({
   router,
-  el: '#app',
+  el: '#app'
 })
 
 /* Assign global services */
