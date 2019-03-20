@@ -18,7 +18,7 @@ export default class YouTubeService {
 				events: {
 					'onStateChange': function (event) {
 						if (event.data === 0) {
-							player.onEnded();
+							window.location.reload();
 						}
 					}
 				},

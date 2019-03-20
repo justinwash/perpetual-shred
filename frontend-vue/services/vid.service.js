@@ -1,5 +1,7 @@
 export default class VidService {
-	uri = 'http://localhost:4000';
+	constructor () {
+		this.uri = 'http://localhost:4000';
+	}
 
 	getVids() {
 		return axios.get(`${this.uri}/vids`);
@@ -7,32 +9,6 @@ export default class VidService {
 
 	getVidById(id) {
 		return axios.get(`${this.uri}/vids/${id}`);
-	}
-
-	addVid(title, description, origin, releaseDate, url) {
-		const vid = {
-			title: title,
-			description: description,
-			origin: origin,
-			releaseDate: releaseDate,
-			url: url
-		};
-		return axios.post(`${this.uri}/vids/add`, vid);
-	}
-
-	updateVid(id, title, description, origin, releaseDate, url) {
-		const vid = {
-			title: title,
-			description: description,
-			origin: origin,
-			releaseDate: releaseDate,
-			url: url
-		};
-		return axios.post(`${this.uri}/vids/update/${id}`, vid);
-	}
-
-	deleteVid(id) {
-		return axios.get(`${this.uri}/vids/delete/${id}`);
 	}
 
 	getPlayerType(url) {

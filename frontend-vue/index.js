@@ -1,5 +1,8 @@
 /* Services */
 import AuthenticationService from './services/authentication.service.js';
+import VidService from './services/vid.service.js';
+import YoutubeService from './services/youtube.service.js';
+import FavService from './services/fav.service.js';
 
 /* Routes */
 const router = new VueRouter({
@@ -10,10 +13,13 @@ const router = new VueRouter({
 });
 
 /* Create */
-new Vue({
+window.PS = new Vue({
   router,
-  el: '#app'
+  el: '#perpetual-shred'
 })
 
 /* Assign global services */
 Object.defineProperty(Vue.prototype, '_authenticationService', { value: new AuthenticationService() });
+Object.defineProperty(Vue.prototype, '_vidService', { value: new VidService() });
+Object.defineProperty(Vue.prototype, '_youtubeService', { value: new YoutubeService() });
+Object.defineProperty(Vue.prototype, '_favService', { value: new FavService() });

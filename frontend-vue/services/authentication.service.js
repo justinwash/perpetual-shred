@@ -8,13 +8,7 @@ export default class AuthenticationService {
 		let request;
 
 		if (method === 'post') {
-			request = axios.post(`${this.uri}/user/${type}`, user).then(res => {
-				if (res.data.token) {
-					this.saveToken(res.data.token);
-				}
-				return res;
-			});
-			return request;
+			return rxhr({ url: `${this.uri}/user/${type}`, method: 'post', responseType: 'json', options: { body: user } });
 		} else {
 			request = axios.get(`${this.uri}/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } }).then(res => {
 				if (res.data.token) {
@@ -22,7 +16,6 @@ export default class AuthenticationService {
 				}
 				return res;
 			});
-			return request;
 		}
 	}
 

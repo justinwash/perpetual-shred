@@ -1,8 +1,8 @@
-import { AuthenticationService } from '.authentication.service.js';
-
 export default class FavService {
-	uri = 'http://localhost:4000';
-	auth = new AuthenticationService();
+	constructor () {
+		this.uri = 'http://localhost:4000';
+		this.auth = PS._authenticationService;
+	}
 
 	async saveFav(vid) {
 		if (this.auth.isLoggedIn()) {

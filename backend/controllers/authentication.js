@@ -25,7 +25,7 @@ AuthenticationController.register = function (req, res) {
 AuthenticationController.login = function (req, res) {
 	passport.authenticate('local', function (err, user, info) {
 		var token;
-
+		console.log(req);
 		// If Passport throws/catches an error
 		if (err) {
 			res.status(404).json(err);
