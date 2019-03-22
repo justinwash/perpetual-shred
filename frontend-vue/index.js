@@ -9,6 +9,7 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: httpVueLoader('./pages/player.page.vue') },
     { path: '/login', component: httpVueLoader('./pages/login.page.vue') },
+    { path: '*', component: httpVueLoader('./pages/404.vue') }
   ]
 });
 

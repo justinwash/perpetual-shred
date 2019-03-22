@@ -19,7 +19,9 @@
 			Password:
 			<input v-model="registerPayload.password" label="Password">
 			<br>
-			<button v-on:click="login">REGISTER PLEASE I'M SO LONELY</button>
+			<button v-on:click="register">REGISTER PLEASE I'M SO LONELY</button>
+			<span v-if="registerStatus == true">Thank you so much!</span>
+			<span v-if="registerStatus == false">Wow you suck at registering!</span>
 		</div>
 	</div>
 </template>
@@ -43,17 +45,22 @@
 		},
 		methods: {
 			login() {
-				const wtf = PS._authenticationService.login(this.loginPayload).subscribe(res => {
-					console.log(res)
-					if (res) {
-						this.loginStatus = res.status;
-						console.log(this.loginStatus);
+				PS._authenticationService.login(this.loginPayload).then(res => {
+					if (res.status === 200) {
+						this.loginStatus = true;
+					} else {
+						this.loginStatus = false;
 					}
-				})
-				console.log(wtf)
+				});
 			},
 			register() {
-				PS._authenticationService.register(this.payload);
+				PS._authenticationService.register(this.registerPayload).then(res => {
+					if (res.status === 200) {
+						this.registerStatus = true;
+					} else {
+						this.registerStatus = false;
+					}
+				});
 			}
 		}
 	}

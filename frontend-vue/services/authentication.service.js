@@ -4,18 +4,29 @@ export default class AuthenticationService {
 		this.uri = 'http://localhost:4000';
 	}
 
-	request(method /* 'post' | 'get' */, type /* 'login' | 'register' | 'profile' */, user) {
+	async request(method /* 'post' | 'get' */, type /* 'login' | 'register' | 'profile' */, user) {
 		let request;
 
 		if (method === 'post') {
-			return rxhr({ url: `${this.uri}/user/${type}`, method: 'post', responseType: 'json', options: { body: user } });
+			request = axios.post(`${this.uri}/user/${type}`, user).then(res => {
+				if (res.data.token) {
+					this.saveToken(res.data.token);
+				}
+				return res;
+			}).catch(err => {
+				return err;
+			});
+			return request;
 		} else {
 			request = axios.get(`${this.uri}/user/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` } }).then(res => {
 				if (res.data.token) {
 					this.saveToken(res.data.token);
 				}
 				return res;
+			}).catch(err => {
+				return err;
 			});
+			return request;
 		}
 	}
 
