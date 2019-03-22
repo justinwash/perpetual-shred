@@ -1,9 +1,9 @@
 <template>
-<div>
-	<p>{{ greeting }}</p>
-	<video-player></video-player>
-	<sidebar></sidebar>
-</div>
+	<div>
+		<p>{{ greeting }}</p>
+		<player></player>
+		<sidebar></sidebar>
+	</div>
 </template>
 
 <script>
@@ -14,7 +14,7 @@
 			}
 		},
 		components: {
-			'video-player': httpVueLoader('../components/player/video.component.vue'),
+			'player': httpVueLoader('../components/player/player.component.vue'),
 			'sidebar': httpVueLoader('../components/player/sidebar.component.vue')
 		}
 	}

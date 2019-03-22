@@ -1,4 +1,4 @@
-import { YouTubeService } from '../services/youtube.service';
+import YouTubeService from '../services/youtube.service.js';
 
 export default class YouTubePlayer {
 	constructor (vid, onEnded) {
@@ -8,11 +8,11 @@ export default class YouTubePlayer {
 		this.create();
 	}
 
-	type = 'youtube';
-	vid;
-	service;
-	controller;
-	onEnded;
+	// type: 'youtube';
+	// vid;
+	// service;
+	// controller;
+	// onEnded;
 
 	create() {
 		this.service.createYouTubePlayer(this);
