@@ -12,17 +12,15 @@
 
 <script>
 	module.exports = {
-		head: {
-			script: [
-				{ src: 'models/vid.model.js' }
-			]
-		},
 		props: ['player'],
 		data() {
 			return {
+				vid: {}
 			}
 		},
 		mounted() {
+			this.vid = depend('models/vid.model.js')
+			console.log(this.vid)
 		}
 	}
 </script>

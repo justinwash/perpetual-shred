@@ -1,3 +1,8 @@
+/* RequireJs Config  */
+require.config({
+  baseUrl: "./"
+});
+
 /* Services */
 import AuthenticationService from './services/authentication.service.js';
 import VidService from './services/vid.service.js';

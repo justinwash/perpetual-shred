@@ -1,5 +1,5 @@
-class Vid {
-  constructor () {
+define(function () {
+  return function Vid() {
     this.id;
     this.title;
     this.description;
@@ -7,4 +7,4 @@ class Vid {
     this.releaseDate;
     this.url;
   }
-}
+});
