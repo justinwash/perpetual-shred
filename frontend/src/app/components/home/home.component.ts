@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
 		const randomId = this.getRandomInt(0, this.vids.length);
 		this.currentVid = this.vids[randomId];
 		this.cd.detectChanges();
-		window.location.reload();
 	}
 
 	getRandomInt(min: number, max: number) {

@@ -12,16 +12,7 @@
 
 <script>
 	module.exports = {
-		props: ['player'],
-		data() {
-			return {
-				vid: {}
-			}
-		},
-		mounted() {
-			this.vid = depend('models/vid.model.js')
-			console.log(this.vid)
-		}
+		props: ['player', 'vid']
 	}
 </script>
 

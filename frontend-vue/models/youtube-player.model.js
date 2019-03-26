@@ -1,21 +1,13 @@
-import YouTubeService from '../services/youtube.service.js';
-
-export default class YouTubePlayer {
-	constructor (vid, onEnded) {
+define(function () {
+	function YoutubePlayer(vid) {
+		this.type = 'youtube';
 		this.vid = vid;
-		this.onEnded = onEnded;
-		this.service = new YouTubeService();
-		this.create();
+		this.controller = null;
+		this.create = function () {
+			PS._youtubeService.createYouTubePlayer(this);
+		}();
 	}
 
-	// type: 'youtube';
-	// vid;
-	// service;
-	// controller;
-	// onEnded;
-
-	create() {
-		this.service.createYouTubePlayer(this);
-	}
-}
+	return YoutubePlayer;
+});
 

@@ -1,10 +1,10 @@
 define(function () {
-  return function Vid() {
-    this.id;
-    this.title;
-    this.description;
-    this.origin;
-    this.releaseDate;
-    this.url;
+  return function Vid(vid) {
+    this.id = vid.id;
+    this.title = vid.title;
+    this.description = vid.description;
+    this.origin = vid.origin;
+    this.releaseDate = vid.releaseDate;
+    this.url = vid.url;
   }
 });
