@@ -1,8 +1,3 @@
-/* RequireJs Config  */
-require.config({
-  baseUrl: "./"
-});
-
 /* Services */
 import AuthenticationService from './services/authentication.service.js';
 import VidService from './services/vid.service.js';
@@ -12,16 +7,19 @@ import FavService from './services/fav.service.js';
 /* Routes */
 const router = new VueRouter({
   routes: [
-    { path: '/', component: httpVueLoader('./pages/player.page.vue') },
-    { path: '/login', component: httpVueLoader('./pages/login.page.vue') },
-    { path: '*', component: httpVueLoader('./pages/404.vue') }
+    { path: '/', component: httpVueLoader('pages/player.page.vue') },
+    { path: '/login', component: httpVueLoader('pages/login.page.vue') },
+    { path: '*', component: httpVueLoader('pages/404.vue') }
   ]
 });
 
 /* Create */
 window.PS = new Vue({
   router,
-  el: '#perpetual-shred'
+  el: '#perpetual-shred',
+  components: {
+    'navigation': httpVueLoader('components/shared/main-nav.component.vue')
+  }
 })
 
 /* Assign global services */

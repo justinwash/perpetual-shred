@@ -7,7 +7,7 @@ export default class YouTubeService {
 				height: '100%',
 				width: '100%',
 				playerVars: {
-					autoplay: 1,
+					autoplay: 0,
 					loop: 0,
 					controls: 0,
 					showinfo: 0,

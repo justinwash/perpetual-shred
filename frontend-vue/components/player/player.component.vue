@@ -2,9 +2,7 @@
 	<div v-if="player" class="player">
 		<div class="player-outer">
 			<div class="player-inner">
-				<div v-if="player.type === 'youtube'" id="player" class="youtube-player"></div>
-				<div v-if="player.type === 'vimeo'" id="player" class="vimeo-player"></div>
-				<div v-if="player.type === 'pinkbike'" id="player" class="pinkbike-player"></div>
+				<div id="player" class="youtube-player"></div>
 			</div>
 		</div>
 	</div>
