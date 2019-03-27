@@ -20,6 +20,9 @@ export default class YouTubeService {
 						if (event.data === 0) {
 							window.location.reload();
 						}
+						else {
+							player.controller.play();
+						}
 					}
 				},
 			});

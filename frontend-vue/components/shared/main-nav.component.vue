@@ -2,12 +2,10 @@
 	<div class="main-nav">
 		<main-nav-button v-bind:parent="this"></main-nav-button>
 		<div v-bind:class="'nav-overlay ' + (navOverlayActive ? 'active' : 'inactive')"></div>
-		<div class="nav-button-group">
-			<span v-bind:class="'nav-button ' + (navOverlayActive ? 'active' : 'inactive')">Discover Radness</span>
-			<span v-bind:class="'nav-button ' + (navOverlayActive ? 'active' : 'inactive')">All Videos</span>
-			<span
-				v-bind:class="'nav-button ' + (navOverlayActive ? 'active' : 'inactive')"
-			>About Perpetual Shred</span>
+		<div v-bind:class="'nav-button-group ' + (navOverlayActive ? 'active' : 'inactive')">
+			<span class="nav-button">Discover Radness</span>
+			<span class="nav-button">All Videos</span>
+			<span class="nav-button">About Perpetual Shred</span>
 		</div>
 		<div v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')">Log In</div>
 	</div>
@@ -40,6 +38,14 @@
 		background: black;
 		z-index: -10;
 	}
+	.nav-overlay.active {
+		opacity: 0.8;
+		transition: 0.2s;
+	}
+	.nav-overlay.inactive {
+		opacity: 0;
+		transition: 0.2s;
+	}
 
 	.nav-button-group {
 		position: fixed;
@@ -51,6 +57,14 @@
 		top: 1rem;
 		left: 8rem;
 		z-index: 10;
+	}
+	.nav-button-group.active {
+		opacity: 1;
+		transition: 0.2s;
+	}
+	.nav-button-group.inactive {
+		opacity: 0;
+		transition: 0.2s;
 	}
 
 	.nav-button {
@@ -67,13 +81,11 @@
 		top: 1rem;
 		right: 2rem;
 	}
-
-	.active {
-		opacity: 0.8;
+	.login-button.active {
+		opacity: 1;
 		transition: 0.2s;
 	}
-
-	.inactive {
+	.login-button.inactive {
 		opacity: 0;
 		transition: 0.2s;
 	}
