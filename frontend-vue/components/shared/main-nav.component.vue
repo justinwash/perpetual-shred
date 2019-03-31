@@ -2,10 +2,14 @@
 	<div class="main-nav">
 		<main-nav-button v-bind:parent="this"></main-nav-button>
 		<div v-bind:class="'nav-overlay ' + (navOverlayActive ? 'active' : 'inactive')"></div>
-		<div v-bind:class="'nav-button-group ' + (navOverlayActive ? 'active' : 'inactive')">
-			<span class="nav-button">Discover Radness</span>
-			<span class="nav-button">All Videos</span>
-			<span class="nav-button">About Perpetual Shred</span>
+		<div class="nav-button-group-center-wrapper">
+			<div v-bind:class="'nav-button-group ' + (navOverlayActive ? 'active' : 'inactive')">
+				<span class="nav-button">
+					<img src="assets/icons/video-camera.svg">Discover Radness
+				</span>
+				<span class="nav-button">All Videos</span>
+				<span class="nav-button">About Perpetual Shred</span>
+			</div>
 		</div>
 		<div v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')">Log In</div>
 	</div>
@@ -47,16 +51,20 @@
 		transition: 0.2s;
 	}
 
+	.nav-button-group-center-wrapper {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: calc(100vh - 35rem);
+	}
+
 	.nav-button-group {
-		position: fixed;
 		color: white;
 		font-family: serif;
 		font-size: 2rem;
 		display: flex;
 		flex-direction: column;
-		top: 1rem;
-		left: 8rem;
-		z-index: 10;
 	}
 	.nav-button-group.active {
 		opacity: 1;
