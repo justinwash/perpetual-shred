@@ -3,12 +3,19 @@
 		<main-nav-button v-bind:parent="this"></main-nav-button>
 		<div v-bind:class="'nav-overlay ' + (navOverlayActive ? 'active' : 'inactive')"></div>
 		<div class="nav-button-group-center-wrapper">
-			<div v-bind:class="'nav-button-group ' + (navOverlayActive ? 'active' : 'inactive')">
+			<div
+				v-on:click="getNewVid()"
+				v-bind:class="'nav-button-group ' + (navOverlayActive ? 'active' : 'inactive')"
+			>
 				<span class="nav-button">
-					<img src="assets/icons/video-camera.svg">Discover Radness
+					<img class="nav-button-icon" src="assets/icons/video-camera.svg">Discover Radness
 				</span>
-				<span class="nav-button">All Videos</span>
-				<span class="nav-button">About Perpetual Shred</span>
+				<span class="nav-button">
+					<img class="nav-button-icon" src="assets/icons/video-player.svg">All Videos
+				</span>
+				<span class="nav-button">
+					<img class="nav-button-icon" src="assets/icons/users.svg">About Perpetual Shred
+				</span>
 			</div>
 		</div>
 		<div v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')">Log In</div>
@@ -25,6 +32,9 @@
 		methods: {
 			toggleMainNavOverlay() {
 				this.navOverlayActive = !this.navOverlayActive;
+			},
+			getNewVid() {
+				window.location.reload();
 			}
 		},
 		components: {
@@ -77,6 +87,12 @@
 
 	.nav-button {
 		cursor: pointer;
+	}
+
+	.nav-button-icon {
+		height: 1.8rem;
+		margin-right: 10px;
+		transform: translateY(5px);
 	}
 
 	.login-button {
