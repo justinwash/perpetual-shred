@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="login-page">
 		<div class="form">
 			<p>login</p>Email:
 			<input v-model="loginPayload.email" label="Email">
@@ -69,6 +69,18 @@
 <style scoped>
 	div {
 		text-align: center;
+	}
+
+	.login-page {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		height: 100vh;
+		background: #000;
+		color: white;
+		position: fixed;
+		top: 0;
 	}
 
 	p {

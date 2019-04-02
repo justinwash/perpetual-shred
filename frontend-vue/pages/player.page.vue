@@ -8,17 +8,6 @@
 <script>
 	module.exports = {
 		data: function () {
-			// const vid = new Vid(
-			// 	'123',
-			// 	'a video title',
-			// 	'a video description',
-			// 	'pinkbike probably',
-			// 	'12-34-5678',
-			// 	'https://www.youtube.com/watch?v=Yb8XUhxZeb8'
-			// );
-
-			// const player = new YoutubePlayer(vid);
-
 			return {
 				vid: new Vid(),
 				player: {}
