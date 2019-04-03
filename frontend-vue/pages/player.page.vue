@@ -8,7 +8,6 @@
 <script>
 	module.exports = {
 		data: function () {
-			console.log(this.$route.params)
 			return {
 				params: this.$route.params,
 				vids: [],
@@ -21,32 +20,31 @@
 				return PS._vidService.getVidById(id);
 			},
 
+			getRandomVid() {
+				return PS._vidService.getRandomVid();
+			},
+
 			getVids() {
 				return PS._vidService.getVids();
 			},
-
-			selectRandomVid() {
-				const randomId = this.getRandomInt(0, this.vids.length);
-				return this.vids[randomId];
-			},
-
-			getRandomInt(min, max) {
-				min = Math.ceil(min);
-				max = Math.floor(max);
-				return Math.floor(Math.random() * (max - min)) + min;
-			}
 		},
 		mounted() {
 			if (this.params.id) {
 				this.getVid(this.params.id).then(res => {
 					this.vid = res.data;
+					console.log(this.vid);
 					this.player = new YoutubePlayer(this.vid);
 				});
 			} else {
-				this.getVids().then(res => {
-					this.vids = res.data;
-					this.vid = this.selectRandomVid();
-					this.player = new YoutubePlayer(this.vid);
+				this.getRandomVid().then((res) => {
+					if (res.data[0]) {
+						this.vid = res.data[0];
+						console.log(this.vid);
+						this.player = new YoutubePlayer(this.vid);
+					} else err => {
+						console.log(err);
+						window.location.reload();
+					}
 				});
 			}
 		},

@@ -18,7 +18,9 @@
 				</span>
 			</div>
 		</div>
-		<div v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')">Log In</div>
+		<router-link to="/login">
+			<div v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')">Log In</div>
+		</router-link>
 	</div>
 </template>
 
@@ -34,6 +36,7 @@
 				this.navOverlayActive = !this.navOverlayActive;
 			},
 			getNewVid() {
+				// this.$router.replace('/'); why doesn't this work
 				window.location.reload();
 			}
 		},
@@ -78,11 +81,13 @@
 	}
 	.nav-button-group.active {
 		opacity: 1;
-		transition: 0.2s;
+		transition: visibility 0s, opacity 0.2s linear;
+		cursor: pointer;
 	}
 	.nav-button-group.inactive {
 		opacity: 0;
-		transition: 0.2s;
+		visibility: hidden;
+		transition: visibility 0s, opacity 0.2s linear;
 	}
 
 	.nav-button {
@@ -106,10 +111,12 @@
 	}
 	.login-button.active {
 		opacity: 1;
-		transition: 0.2s;
+		transition: visibility 0s, opacity 0.2s linear;
+		cursor: pointer;
 	}
 	.login-button.inactive {
 		opacity: 0;
-		transition: 0.2s;
+		visibility: hidden;
+		transition: visibility 0s, opacity 0.2s linear;
 	}
 </style>

@@ -12,6 +12,15 @@ vidsRouter.route('/').get((req, res) => {
 	});
 });
 
+vidsRouter.route('/random').get((req, res) => {
+	Vid.aggregate([{ $sample: { size: 1 } }], (err, vid) => {
+		if (err)
+			console.log(err);
+		else
+			res.json(vid);
+	});
+});
+
 vidsRouter.route('/:id').get((req, res) => {
 	Vid.findById(req.params.id, (err, vid) => {
 		if (err)

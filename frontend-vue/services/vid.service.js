@@ -7,6 +7,10 @@ export default class VidService {
 		return axios.get(`${this.uri}/vids`);
 	}
 
+	getRandomVid() {
+		return axios.get(`${this.uri}/vids/random`);
+	}
+
 	getVidById(id) {
 		return axios.get(`${this.uri}/vids/${id}`);
 	}

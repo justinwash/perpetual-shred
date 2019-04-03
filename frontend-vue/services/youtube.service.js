@@ -1,5 +1,6 @@
 export default class YouTubeService {
 	createYouTubePlayer(player) {
+		window.YT = null;
 		this.initializeYoutubeApi();
 		window.onYouTubeIframeAPIReady = () => {
 			player.controller = new window.YT.Player('player', {
@@ -27,9 +28,13 @@ export default class YouTubeService {
 	}
 
 	initializeYoutubeApi() {
+		const existingApi = document.getElementById('youtube-api');
+		if (existingApi) existingApi.remove();
+
 		const doc = window.document;
 		const playerApiScript = doc.createElement('script');
 		playerApiScript.type = 'text/javascript';
+		playerApiScript.id = 'youtube-api';
 		playerApiScript.src = 'http://www.youtube.com/iframe_api';
 		doc.body.appendChild(playerApiScript);
 	}
