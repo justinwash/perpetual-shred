@@ -3,3 +3,10 @@ body {
   font-family: sans-serif;
   overflow: hidden;
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: color .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
