@@ -63,18 +63,18 @@
 
 	.nav-button-group-center-wrapper {
 		height: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding-top: calc(100vh - 35rem);
 	}
-
 	.nav-button-group {
 		color: white;
 		font-family: serif;
 		font-size: 2rem;
 		display: flex;
 		flex-direction: column;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		white-space: nowrap;
 	}
 	.nav-button-group.active {
 		opacity: 1;
@@ -88,7 +88,6 @@
 	.nav-button {
 		cursor: pointer;
 	}
-
 	.nav-button-icon {
 		height: 1.8rem;
 		margin-right: 10px;

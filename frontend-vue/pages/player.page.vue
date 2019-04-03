@@ -8,19 +8,26 @@
 <script>
 	module.exports = {
 		data: function () {
+			console.log(this.$route.params)
 			return {
-				vid: new Vid(),
-				player: {}
+				params: this.$route.params,
+				vids: [],
+				vid: null,
+				player: null
 			}
 		},
 		methods: {
-			fetchVids() {
+			getVid(id) {
+				return PS._vidService.getVidById(id);
+			},
+
+			getVids() {
 				return PS._vidService.getVids();
 			},
 
 			selectRandomVid() {
 				const randomId = this.getRandomInt(0, this.vids.length);
-				this.vid = this.vids[randomId];
+				return this.vids[randomId];
 			},
 
 			getRandomInt(min, max) {
@@ -30,11 +37,18 @@
 			}
 		},
 		mounted() {
-			this.fetchVids().then(res => {
-				this.vids = res.data;
-				this.selectRandomVid();
-				this.player = new YoutubePlayer(this.vid);
-			});
+			if (this.params.id) {
+				this.getVid(this.params.id).then(res => {
+					this.vid = res.data;
+					this.player = new YoutubePlayer(this.vid);
+				});
+			} else {
+				this.getVids().then(res => {
+					this.vids = res.data;
+					this.vid = this.selectRandomVid();
+					this.player = new YoutubePlayer(this.vid);
+				});
+			}
 		},
 		components: {
 			'player': httpVueLoader('../components/player/player.component.vue'),
