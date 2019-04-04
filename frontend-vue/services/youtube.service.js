@@ -1,5 +1,7 @@
 export default class YouTubeService {
 	createYouTubePlayer(player) {
+		var startTime = null;
+
 		window.YT = null;
 		this.initializeYoutubeApi();
 		window.onYouTubeIframeAPIReady = () => {
@@ -20,6 +22,14 @@ export default class YouTubeService {
 					'onStateChange': function (event) {
 						if (event.data === 0) {
 							window.location.reload();
+						}
+						if (event.data === 1) {
+							if (PS._store.time) {
+								startTime = PS._store.time;
+								PS._store.time = null;
+								PS._store.player.controller.seekTo(startTime);
+
+							}
 						}
 					}
 				},

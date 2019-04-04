@@ -1,5 +1,5 @@
 export default class AuthenticationService {
-	constructor() {
+	constructor () {
 		this.token;
 		this.uri = 'http://localhost:4000';
 	}
@@ -57,7 +57,6 @@ export default class AuthenticationService {
 	logout() {
 		this.token = '';
 		window.localStorage.removeItem('mean-token');
-		window.location.replace('/');
 	}
 
 	getUserDetails() {
@@ -86,7 +85,7 @@ export default class AuthenticationService {
 }
 
 export class UserDetails {
-	constructor() {
+	constructor () {
 		_id;
 		email;
 		name;
@@ -98,13 +97,13 @@ export class UserDetails {
 }
 
 export class TokenResponse {
-	constructor() {
+	constructor () {
 		token;
 	}
 }
 
 export class TokenPayload {
-	constructor() {
+	constructor () {
 		email;
 		password;
 		name;

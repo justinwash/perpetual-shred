@@ -18,22 +18,24 @@
 				</span>
 			</div>
 		</div>
-		<router-link v-bind:to="(isLoggedIn ? '/login' : '/account')">
-			<span v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')">
-				<img class="nav-button-icon" src="assets/icons/user.svg">
-				{{ (isLoggedIn ? 'Log In' : user.name) }}
-			</span>
-		</router-link>
+		<span
+			v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')"
+			v-on:click="navigateToLogin()"
+		>
+			<img class="nav-button-icon" src="assets/icons/user.svg">
+			{{ (isLoggedIn ? user.name : 'Log In') }}
+		</span>
 	</div>
 </template>
 
 <script>
 	module.exports = {
+		props: ['player'],
 		data() {
 			return {
 				navOverlayActive: false,
-				isLoggedIn: this.getLoginStatus(),
-				user: this.getUser()
+				isLoggedIn: PS._authenticationService.isLoggedIn(),
+				user: PS._authenticationService.getUserDetails()
 			}
 		},
 		methods: {
@@ -41,14 +43,11 @@
 				this.navOverlayActive = !this.navOverlayActive;
 			},
 			getNewVid() {
-				// this.$router.replace('/'); why doesn't this work
 				window.location.reload();
 			},
-			getLoginStatus() {
-				return PS._authenticationService.isLoggedIn();
-			},
-			getUser() {
-				return PS._authenticationService.getUserDetails();
+			navigateToLogin() {
+				PS._store.setTime(this.player);
+				this.$router.push(this.isLoggedIn ? '/account' : '/login');
 			}
 		},
 		components: {

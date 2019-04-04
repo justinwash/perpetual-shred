@@ -4,12 +4,15 @@ import VidService from './services/vid.service.js';
 import YoutubeService from './services/youtube.service.js';
 import FavService from './services/fav.service.js';
 
+import Store from './services/store.service.js';
+
 /* Routes */
 const router = new VueRouter({
   routes: [
     { path: '/', component: httpVueLoader('pages/player.page.vue') },
     { path: '/vid/:id', component: httpVueLoader('pages/player.page.vue') },
     { path: '/login', component: httpVueLoader('pages/login.page.vue') },
+    { path: '/account', component: httpVueLoader('pages/account.page.vue') },
     { path: '*', component: httpVueLoader('pages/404.vue') }
   ]
 });
@@ -28,3 +31,4 @@ Object.defineProperty(Vue.prototype, '_authenticationService', { value: new Auth
 Object.defineProperty(Vue.prototype, '_vidService', { value: new VidService() });
 Object.defineProperty(Vue.prototype, '_youtubeService', { value: new YoutubeService() });
 Object.defineProperty(Vue.prototype, '_favService', { value: new FavService() });
+Object.defineProperty(Vue.prototype, '_store', { value: new Store() });

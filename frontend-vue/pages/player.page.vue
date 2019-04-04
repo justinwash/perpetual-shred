@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<navigation v-bind:player="player"></navigation>
 		<player v-bind:player="player" v-bind:vid="vid"></player>
 		<sidebar></sidebar>
 	</div>
@@ -20,6 +21,14 @@
 				return PS._vidService.getVidById(id);
 			},
 
+			setVid(vid) {
+				this.vid = vid;
+				PS._store.setVid(this.vid);
+
+				this.player = new YoutubePlayer(vid);
+				PS._store.setPlayer(this.player);
+			},
+
 			getRandomVid() {
 				return PS._vidService.getRandomVid();
 			},
@@ -31,26 +40,27 @@
 		mounted() {
 			if (this.params.id) {
 				this.getVid(this.params.id).then(res => {
-					this.vid = res.data;
-					console.log(this.vid);
-					this.player = new YoutubePlayer(this.vid);
+					this.setVid(res.data);
 				});
+
+			} else if (PS._store.vid) {
+				this.setVid(PS._store.vid);
+
 			} else {
 				this.getRandomVid().then((res) => {
 					if (res.data[0]) {
-						this.vid = res.data[0];
-						console.log(this.vid);
-						this.player = new YoutubePlayer(this.vid);
+						this.setVid(res.data[0]);
 					} else err => {
 						console.log(err);
-						window.location.reload();
+						this.mounted();
 					}
 				});
 			}
 		},
 		components: {
 			'player': httpVueLoader('../components/player/player.component.vue'),
-			'sidebar': httpVueLoader('../components/player/sidebar.component.vue')
+			'sidebar': httpVueLoader('../components/player/sidebar.component.vue'),
+			'navigation': httpVueLoader('../components/shared/main-nav.component.vue'),
 		}
 	}
 </script>
@@ -59,5 +69,14 @@
 	p {
 		font-size: 2em;
 		text-align: center;
+	}
+
+	#player {
+		position: absolute;
+		min-height: 100vh;
+		width: 178vh;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 </style>

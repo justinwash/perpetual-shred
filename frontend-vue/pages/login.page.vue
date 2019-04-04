@@ -1,10 +1,13 @@
 <template>
 	<div class="login-page">
+		<div class="back-button" v-on:click="$router.push('/')">
+			<button>Back to Home</button>
+		</div>
 		<div class="form">
 			<p>login</p>Email:
 			<input v-model="loginPayload.email" label="Email">
 			Password:
-			<input v-model="loginPayload.password" label="Password">
+			<input type="password" v-model="loginPayload.password" label="Password">
 			<br>
 			<button v-on:click="login">LOGIN PLEASE DO IT EVERYONES WAITING</button>
 			<span v-if="loginStatus == true">You did it!</span>
@@ -17,7 +20,7 @@
 			Email:
 			<input v-model="registerPayload.email" label="Email">
 			Password:
-			<input v-model="registerPayload.password" label="Password">
+			<input type="password" v-model="registerPayload.password" label="Password">
 			<br>
 			<button v-on:click="register">REGISTER PLEASE I'M SO LONELY</button>
 			<span v-if="registerStatus == true">Thank you so much!</span>
@@ -48,6 +51,7 @@
 				PS._authenticationService.login(this.loginPayload).then(res => {
 					if (res.status === 200) {
 						this.loginStatus = true;
+						this.$router.push('/')
 					} else {
 						this.loginStatus = false;
 					}
