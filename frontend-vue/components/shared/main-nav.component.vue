@@ -14,12 +14,15 @@
 					<img class="nav-button-icon" src="assets/icons/video-player.svg">All Videos
 				</span>
 				<span class="nav-button">
-					<img class="nav-button-icon" src="assets/icons/users.svg">About Perpetual Shred
+					<img class="nav-button-icon" src="assets/icons/team.svg">About Perpetual Shred
 				</span>
 			</div>
 		</div>
-		<router-link to="/login">
-			<div v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')">Log In</div>
+		<router-link v-bind:to="(isLoggedIn ? '/login' : '/account')">
+			<span v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')">
+				<img class="nav-button-icon" src="assets/icons/user.svg">
+				{{ (isLoggedIn ? 'Log In' : user.name) }}
+			</span>
 		</router-link>
 	</div>
 </template>
@@ -28,7 +31,9 @@
 	module.exports = {
 		data() {
 			return {
-				navOverlayActive: false
+				navOverlayActive: false,
+				isLoggedIn: this.getLoginStatus(),
+				user: this.getUser()
 			}
 		},
 		methods: {
@@ -38,6 +43,12 @@
 			getNewVid() {
 				// this.$router.replace('/'); why doesn't this work
 				window.location.reload();
+			},
+			getLoginStatus() {
+				return PS._authenticationService.isLoggedIn();
+			},
+			getUser() {
+				return PS._authenticationService.getUserDetails();
 			}
 		},
 		components: {
@@ -105,9 +116,9 @@
 		font-family: serif;
 		font-size: 2rem;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		top: 1rem;
-		right: 2rem;
+		right: 1.5rem;
 	}
 	.login-button.active {
 		opacity: 1;
