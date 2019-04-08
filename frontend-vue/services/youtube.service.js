@@ -25,7 +25,7 @@ export default class YouTubeService {
 						}
 						if (event.data === 1) {
 							if (PS._store.time) {
-								startTime = PS._store.time;
+								startTime = PS._store.get('time');
 								PS._store.time = null;
 								PS._store.player.controller.seekTo(startTime);
 

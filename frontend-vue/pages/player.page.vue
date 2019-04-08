@@ -23,10 +23,10 @@
 
 			setVid(vid) {
 				this.vid = vid;
-				PS._store.setVid(this.vid);
+				PS._store.set('vid', this.vid);
 
 				this.player = new YoutubePlayer(vid);
-				PS._store.setPlayer(this.player);
+				PS._store.set('player', this.player);
 			},
 
 			getRandomVid() {
@@ -43,8 +43,8 @@
 					this.setVid(res.data);
 				});
 
-			} else if (PS._store.vid) {
-				this.setVid(PS._store.vid);
+			} else if (PS._store.get('vid')) {
+				this.setVid(PS._store.get('vid'));
 
 			} else {
 				this.getRandomVid().then((res) => {

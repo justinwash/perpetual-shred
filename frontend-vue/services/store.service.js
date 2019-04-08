@@ -1,59 +1,13 @@
 export default class Store {
-  constructor () {
-    this.vid = null;
-    this.lastVid = null;
-    this.player = null;
-    this.time = null;
+  set(key, value) {
+    this[key] = value;
   }
 
-  setVid(vid) {
-    if (this.lastVid == null) this.lastVid = vid;
-    else this.lastVid = this.vid;
-    this.vid = vid;
+  get(key) {
+    return this[key];
   }
 
-  getVid() {
-    return this.vid;
+  clear(key) {
+    this[key] = undefined;
   }
-
-  clearVid() {
-    this.vid = null;
-  }
-
-  setLastVid(vid) {
-    this.lastVid = vid;
-  }
-
-  getLastVid() {
-    return this.lastVid;
-  }
-
-  clearLastVid() {
-    this.lastVid = null;
-  }
-
-  setPlayer(player) {
-    this.player = player;
-  }
-
-  getPlayer() {
-    return this.player;
-  }
-
-  clearPlayer() {
-    this.player = null;
-  }
-
-  setTime(player) {
-    this.time = player.controller.getCurrentTime();
-  }
-
-  getTime() {
-    return this.time;
-  }
-
-  clearTime() {
-    this.time = null;
-  }
-
 }

@@ -9,9 +9,11 @@
 		<div class="account-info" v-if="user" v-for="(value, key) in user">
 			<p>{{ key }}: {{ value }}</p>
 		</div>
-    <div v-if="vidLeft" class="account-info">
-      Last video watched this session: {{ vidLeft._id }}: {{ vidLeft.title }}.<br/>
-      Time stopped: {{ vidLeftTime }}
+		<div v-if="vidLeft" class="account-info">
+			Last video watched this session: {{ vidLeft._id }}: {{ vidLeft.title }}.
+			<br>
+			Time stopped: {{ vidLeftTime }}
+		</div>
 	</div>
 </template>
 
@@ -19,15 +21,15 @@
 	module.exports = {
 		data: function () {
 			return {
-        user: PS._authenticationService.getUserDetails(),
-        vidLeft: PS._store.vid ? PS._store.vid : null,
-        vidLeftTime: PS._store.time
+				user: PS._authenticationService.getUserDetails(),
+				vidLeft: PS._store.get('vid') ? PS._store.get('vid') : null,
+				vidLeftTime: PS._store.get('time')
 			}
 		},
 		methods: {
 			logout() {
-        PS._authenticationService.logout();
-        this.$router.push('/');
+				PS._authenticationService.logout();
+				this.$router.push('/');
 			}
 		}
 	}

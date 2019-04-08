@@ -1,42 +1,48 @@
 <template>
 	<div class="main-nav">
 		<main-nav-button v-bind:parent="this"></main-nav-button>
-		<div v-bind:class="'nav-overlay ' + (navOverlayActive ? 'active' : 'inactive')"></div>
+		<div
+			v-bind:class="'nav-overlay ' + (navOverlayActive ? 'active' : 'inactive')"
+		></div>
 		<div class="nav-button-group-center-wrapper">
 			<div
-				v-on:click="getNewVid()"
-				v-bind:class="'nav-button-group ' + (navOverlayActive ? 'active' : 'inactive')"
+				v-bind:class="
+					'nav-button-group ' + (navOverlayActive ? 'active' : 'inactive')
+				"
 			>
-				<span class="nav-button">
-					<img class="nav-button-icon" src="assets/icons/video-camera.svg">Discover Radness
+				<span v-bind:class="'nav-button'" v-on:click="navigateToLogin()">
+					<img class="nav-button-icon" src="assets/icons/user.svg" />{{
+						isLoggedIn ? user.name.trim() : "Log In"
+					}}
+				</span>
+				<span v-on:click="getNewVid()" class="nav-button">
+					<img
+						class="nav-button-icon"
+						src="assets/icons/video-camera.svg"
+					/>Discover Radness
 				</span>
 				<span class="nav-button">
-					<img class="nav-button-icon" src="assets/icons/video-player.svg">All Videos
+					<img class="nav-button-icon" src="assets/icons/video-player.svg" />All
+					Videos
 				</span>
 				<span class="nav-button">
-					<img class="nav-button-icon" src="assets/icons/team.svg">About Perpetual Shred
+					<img class="nav-button-icon" src="assets/icons/team.svg" />About
+					Perpetual Shred
 				</span>
 			</div>
 		</div>
-		<span
-			v-bind:class="'login-button ' + (navOverlayActive ? 'active' : 'inactive')"
-			v-on:click="navigateToLogin()"
-		>
-			<img class="nav-button-icon" src="assets/icons/user.svg">
-			{{ (isLoggedIn ? user.name : 'Log In') }}
-		</span>
 	</div>
 </template>
 
 <script>
 	module.exports = {
-		props: ['player'],
+		props: ["player"],
 		data() {
 			return {
 				navOverlayActive: false,
 				isLoggedIn: PS._authenticationService.isLoggedIn(),
 				user: PS._authenticationService.getUserDetails()
-			}
+			};
 		},
 		methods: {
 			toggleMainNavOverlay() {
@@ -46,14 +52,16 @@
 				window.location.reload();
 			},
 			navigateToLogin() {
-				PS._store.setTime(this.player);
-				this.$router.push(this.isLoggedIn ? '/account' : '/login');
+				PS._store.set("time", this.player.controller.getCurrentTime());
+				this.$router.push(this.isLoggedIn ? "/account" : "/login");
 			}
 		},
 		components: {
-			'main-nav-button': httpVueLoader('components/shared/main-nav-button.component.vue')
+			"main-nav-button": httpVueLoader(
+				"components/shared/main-nav-button.component.vue"
+			)
 		}
-	}
+	};
 </script>
 
 <style scoped>
@@ -107,26 +115,5 @@
 		height: 1.8rem;
 		margin-right: 10px;
 		transform: translateY(5px);
-	}
-
-	.login-button {
-		position: fixed;
-		color: white;
-		font-family: serif;
-		font-size: 2rem;
-		display: flex;
-		flex-direction: row;
-		top: 1rem;
-		right: 1.5rem;
-	}
-	.login-button.active {
-		opacity: 1;
-		transition: visibility 0s, opacity 0.2s linear;
-		cursor: pointer;
-	}
-	.login-button.inactive {
-		opacity: 0;
-		visibility: hidden;
-		transition: visibility 0s, opacity 0.2s linear;
 	}
 </style>
