@@ -1,20 +1,20 @@
 <template>
 	<div>
-		<navigation v-bind:player="player"></navigation>
 		<player v-bind:player="player" v-bind:vid="vid"></player>
-		<sidebar></sidebar>
+		<sidebar v-bind:vid="vid"></sidebar>
+		<navigation v-bind:player="player"></navigation>
 	</div>
 </template>
 
 <script>
 	module.exports = {
-		data: function () {
+		data: function() {
 			return {
 				params: this.$route.params,
 				vids: [],
 				vid: null,
 				player: null
-			}
+			};
 		},
 		methods: {
 			getVid(id) {
@@ -23,6 +23,7 @@
 
 			setVid(vid) {
 				this.vid = vid;
+				console.log(this.vid);
 				PS._store.set('vid', this.vid);
 
 				this.player = new YoutubePlayer(vid);
@@ -35,34 +36,33 @@
 
 			getVids() {
 				return PS._vidService.getVids();
-			},
+			}
 		},
 		mounted() {
 			if (this.params.id) {
-				this.getVid(this.params.id).then(res => {
+				this.getVid(this.params.id).then((res) => {
 					this.setVid(res.data);
 				});
-
 			} else if (PS._store.get('vid')) {
 				this.setVid(PS._store.get('vid'));
-
 			} else {
 				this.getRandomVid().then((res) => {
 					if (res.data[0]) {
 						this.setVid(res.data[0]);
-					} else err => {
-						console.log(err);
-						this.mounted();
-					}
+					} else
+						(err) => {
+							console.log(err);
+							this.mounted();
+						};
 				});
 			}
 		},
 		components: {
-			'player': httpVueLoader('../components/player/player.component.vue'),
-			'sidebar': httpVueLoader('../components/player/sidebar.component.vue'),
-			'navigation': httpVueLoader('../components/shared/main-nav.component.vue'),
+			player: httpVueLoader('../components/player/player.component.vue'),
+			sidebar: httpVueLoader('../components/player/sidebar.component.vue'),
+			navigation: httpVueLoader('../components/shared/main-nav.component.vue')
 		}
-	}
+	};
 </script>
 
 <style scoped>

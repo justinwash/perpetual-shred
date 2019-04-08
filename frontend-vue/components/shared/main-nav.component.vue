@@ -65,6 +65,11 @@
 </script>
 
 <style scoped>
+	.main-nav {
+		position: fixed;
+		top: 0;
+	}
+
 	.nav-overlay {
 		position: fixed;
 		top: 0;
@@ -79,6 +84,7 @@
 	}
 	.nav-overlay.inactive {
 		opacity: 0;
+		visibility: hidden;
 		transition: 0.2s;
 	}
 
