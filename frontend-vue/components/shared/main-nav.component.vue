@@ -12,7 +12,7 @@
 			>
 				<span v-bind:class="'nav-button'" v-on:click="navigateToLogin()">
 					<img class="nav-button-icon" src="assets/icons/user.svg" />{{
-						isLoggedIn ? user.name.trim() : "Log In"
+						isLoggedIn ? user.name.trim() : 'Log In'
 					}}
 				</span>
 				<span v-on:click="getNewVid()" class="nav-button">
@@ -36,7 +36,7 @@
 
 <script>
 	module.exports = {
-		props: ["player"],
+		props: ['player'],
 		data() {
 			return {
 				navOverlayActive: false,
@@ -52,13 +52,13 @@
 				window.location.reload();
 			},
 			navigateToLogin() {
-				PS._store.set("time", this.player.controller.getCurrentTime());
-				this.$router.push(this.isLoggedIn ? "/account" : "/login");
+				PS._store.set('time', this.player.controller.getCurrentTime());
+				this.$router.push(this.isLoggedIn ? '/account' : '/login');
 			}
 		},
 		components: {
-			"main-nav-button": httpVueLoader(
-				"components/shared/main-nav-button.component.vue"
+			'main-nav-button': httpVueLoader(
+				'components/shared/main-nav-button.component.vue'
 			)
 		}
 	};
