@@ -1,3 +1,4 @@
 {
-  "vetur.format.defaultFormatter.html": "prettier"
+  "vetur.format.defaultFormatter.html": "prettier",
+  "vetur.validation.template": false
 }

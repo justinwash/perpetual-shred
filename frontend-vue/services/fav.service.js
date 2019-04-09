@@ -1,39 +1,26 @@
 export default class FavService {
-	constructor () {
+	constructor() {
 		this.uri = 'http://localhost:4000';
-		this.auth = PS._authenticationService;
 	}
 
-	async saveFav(vid) {
-		if (this.auth.isLoggedIn()) {
-			const result = await axios.post(`${this.uri}/user/favs/save`, { userId: this.auth.getUserDetails()._id, vid: vid });
-			if (result.data === true) {
-				return true;
-			} else {
-				return false;
-			}
+	saveFav(vid) {
+		if (PS._authenticationService.isLoggedIn()) {
+			const user = PS._authenticationService.getUserDetails();
+			return axios.post(`${this.uri}/user/favs/save`, { userId: user._id, vid: vid });
 		}
 	}
 
-	async checkFav(vid) {
-		if (this.auth.isLoggedIn()) {
-			const result = await axios.post(`${this.uri}/user/favs/check`, { userId: this.auth.getUserDetails()._id, vid: vid });
-			if (result.data === true) {
-				return true;
-			} else {
-				return false;
-			}
+	checkFav(vid) {
+		if (PS._authenticationService.isLoggedIn()) {
+			const user = PS._authenticationService.getUserDetails();
+			return axios.post(`${this.uri}/user/favs/check`, { userId: user._id, vid: vid });
 		}
 	}
 
-	async removeFav(vid) {
-		if (this.auth.isLoggedIn()) {
-			const result = await axios.post(`${this.uri}/user/favs/remove`, { userId: this.auth.getUserDetails()._id, vid: vid });
-			if (result.data === true) {
-				return true;
-			} else {
-				return false;
-			}
+	removeFav(vid) {
+		if (PS._authenticationService.isLoggedIn()) {
+			const user = PS._authenticationService.getUserDetails();
+			return axios.post(`${this.uri}/user/favs/remove`, { userId: user._id, vid: vid });
 		}
 	}
 }

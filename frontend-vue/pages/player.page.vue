@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<player v-bind:player="player" v-bind:vid="vid"></player>
-		<sidebar v-bind:vid="vid"></sidebar>
+		<player v-if="vid" v-bind:player="player" v-bind:vid="vid"></player>
+		<sidebar v-if="vid" v-bind:vid="vid"></sidebar>
 		<navigation v-bind:player="player"></navigation>
 	</div>
 </template>

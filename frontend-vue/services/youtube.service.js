@@ -28,7 +28,6 @@ export default class YouTubeService {
 								startTime = PS._store.get('time');
 								PS._store.time = null;
 								PS._store.player.controller.seekTo(startTime);
-
 							}
 						}
 					}
