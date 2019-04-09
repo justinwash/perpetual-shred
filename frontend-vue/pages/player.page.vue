@@ -23,7 +23,6 @@
 
 			setVid(vid) {
 				this.vid = vid;
-				console.log(this.vid);
 				PS._store.set('vid', this.vid);
 
 				this.player = new YoutubePlayer(vid);

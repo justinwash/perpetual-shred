@@ -3,6 +3,7 @@ import AuthenticationService from './services/authentication.service.js';
 import VidService from './services/vid.service.js';
 import YoutubeService from './services/youtube.service.js';
 import FavService from './services/fav.service.js';
+import ToastService from './services/toast.service.js';
 
 import Store from './services/store.service.js';
 
@@ -31,4 +32,5 @@ Object.defineProperty(Vue.prototype, '_authenticationService', { value: new Auth
 Object.defineProperty(Vue.prototype, '_vidService', { value: new VidService() });
 Object.defineProperty(Vue.prototype, '_youtubeService', { value: new YoutubeService() });
 Object.defineProperty(Vue.prototype, '_favService', { value: new FavService() });
+Object.defineProperty(Vue.prototype, '_toastService', { value: new ToastService() });
 Object.defineProperty(Vue.prototype, '_store', { value: new Store() });

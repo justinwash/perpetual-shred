@@ -4,6 +4,34 @@ body {
   overflow: hidden;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
+.toast {
+  position: absolute;
+  top: 0;
+  left: calc(50vw);
+  transform: translateX(-50%);
+  padding: 0.7rem;
+  color: white;
+  font-family: sans-serif;
+  background-color: #222;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  transition: 1s;
+}
+
+.toast img {
+  height: 1rem;
+  margin-right: 0.7rem;
+  transform: translateY(0.1rem)
+}
+
+.toast.fade {
+  opacity: 0;
+  transition: 1s;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s
 }

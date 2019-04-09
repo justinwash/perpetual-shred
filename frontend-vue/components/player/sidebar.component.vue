@@ -1,37 +1,35 @@
 <template>
-	<div class="side-bar">
-		<div class="sidebar-actions">
-			<div v-on:click="toggleFav()" class="sidebar-action-button">
-				<img v-if="faved" src="assets/icons/faved.svg" />
-				<img v-if="!faved" src="assets/icons/fav.svg" />
+	<div>
+		<div v-bind:class="'side-bar ' + (open ? 'open' : 'closed')">
+			<action-bar v-if="vid" v-bind:vid="vid"></action-bar>
+			<div class="sidebar-title">
+				{{ vid.title }}
 			</div>
-			<div class="sidebar-action-button">
-				<img src="assets/icons/share.svg" />
+			<div v-if="vid.description != ''" class="sidebar-description-container">
+				<div class="sidebar-description-header">
+					DESCRIPTION
+				</div>
+				<div class="sidebar-description">
+					{{ vid.description }}
+				</div>
+			</div>
+			<div class="sidebar-origin-container">
+				<div class="sidebar-origin">
+					<a class="sidebar-origin-link" :href="vid.origin" target="_blank">
+						ICON Origin (fix me pls)
+					</a>
+				</div>
+				<div class="sidebar-releaseDate">ICON {{ vid.releaseDate }}</div>
+			</div>
+			<div class="player-actions">
+				<diV>
+					PLAY/PAUSE ICON
+				</diV>
 			</div>
 		</div>
-		<div class="sidebar-title">
-			{{ vid.title }}
-		</div>
-		<div v-if="vid.description != ''" class="sidebar-description-container">
-			<div class="sidebar-description-header">
-				DESCRIPTION
-			</div>
-			<div class="sidebar-description">
-				{{ vid.description }}
-			</div>
-		</div>
-		<div class="sidebar-origin-container">
-			<div class="sidebar-origin">
-				<a class="sidebar-origin-link" :href="vid.origin" target="_blank">
-					ICON Origin (fix me pls)
-				</a>
-			</div>
-			<div class="sidebar-releaseDate">ICON {{ vid.releaseDate }}</div>
-		</div>
-		<div class="player-actions">
-			<div class="sidebar-action-button">
-				PLAY/PAUSE ICON
-			</div>
+		<div v-on:click="toggleSidebar()" class="sidebar-toggle-button">
+			<img v-if="open" src="assets/icons/close.svg" />
+			<img v-if="!open" src="assets/icons/open.svg" />
 		</div>
 	</div>
 </template>
@@ -41,35 +39,21 @@
 		props: ['vid'],
 		data: function() {
 			return {
-				faved: false
+				faved: false,
+				open:
+					PS._store.get('sidebarOpen') != undefined
+						? PS._store.get('sidebarOpen')
+						: true
 			};
 		},
-		methods: {
-			isVidFaved() {
-				PS._favService.checkFav(this.vid).then((res) => {
-					this.faved = res.data;
-				});
-			},
-			saveFav() {
-				PS._favService.saveFav(this.vid).then((res) => {
-					this.faved = res.data;
-				});
-			},
-			removeFav() {
-				PS._favService.removeFav(this.vid).then((res) => {
-					this.faved = !res.data;
-				});
-			},
-			toggleFav() {
-				if (this.faved) {
-					this.removeFav();
-				} else {
-					this.saveFav();
-				}
-			}
+		components: {
+			'action-bar': httpVueLoader('components/shared/action-bar.component.vue')
 		},
-		mounted() {
-			this.isVidFaved();
+		methods: {
+			toggleSidebar() {
+				this.open = !this.open;
+				PS._store.set('sidebarOpen', this.open);
+			}
 		}
 	};
 </script>
@@ -88,6 +72,26 @@
 		background-color: rgba(105, 33, 33, 0.7);
 		color: white;
 		text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+	}
+
+	.side-bar.open {
+		transform: unset;
+		transition: 0.33s cubic-bezier(0.4, 0.34, 0, 0.96);
+	}
+
+	.side-bar.closed {
+		transform: translateX(100%);
+		transition: 0.33s cubic-bezier(0.4, 0.34, 0, 0.96);
+	}
+
+	.sidebar-toggle-button {
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		color: white;
+		margin-bottom: 1rem;
+		width: 2.2rem;
+		cursor: pointer;
 	}
 
 	.sidebar-content {
@@ -122,25 +126,21 @@
 		font-size: medium;
 	}
 
-	.sidebar-actions {
-		display: flex;
-		width: 100%;
-		top: 1rem;
-		color: white;
-		margin-bottom: 1rem;
-	}
-
-	.sidebar-action-button {
-		width: 2.2rem;
-		margin-right: 1rem;
-	}
-
-	.sidebar-action-button:hover {
-		cursor: pointer;
-	}
-
 	.sidebar-origin-link {
 		color: white;
 		text-decoration: none;
+	}
+
+	.side-bar::-webkit-scrollbar {
+		width: 0.5rem;
+	}
+
+	.side-bar::-webkit-scrollbar-track {
+		border-radius: 10px;
+	}
+
+	.side-bar::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background: #ffffff55;
 	}
 </style>
