@@ -1,30 +1,36 @@
 <template>
 	<div>
 		<div v-bind:class="'side-bar ' + (open ? 'open' : 'closed')">
-			<action-bar v-if="vid" v-bind:vid="vid"></action-bar>
-			<div class="sidebar-title">
-				{{ vid.title }}
-			</div>
-			<div v-if="vid.description != ''" class="sidebar-description-container">
-				<div class="sidebar-description-header">
-					DESCRIPTION
+			<div class="sidebar-info-container text-fade">
+				<action-bar v-if="vid" v-bind:vid="vid"></action-bar>
+				<div class="sidebar-title">
+					{{ vid.title }}
 				</div>
-				<div class="sidebar-description">
-					{{ vid.description }}
+				<div v-if="vid.description != ''" class="sidebar-description-container">
+					<div class="sidebar-description-header">
+						DESCRIPTION
+					</div>
+					<div class="sidebar-description">
+						{{ vid.description }}
+					</div>
+				</div>
+				<div class="sidebar-origin-container">
+					<div class="sidebar-origin">
+						<a class="sidebar-origin-link" :href="vid.origin" target="_blank">
+							ICON Origin (fix me pls)
+						</a>
+					</div>
+					<div class="sidebar-releaseDate">ICON {{ vid.releaseDate }}</div>
 				</div>
 			</div>
-			<div class="sidebar-origin-container">
-				<div class="sidebar-origin">
-					<a class="sidebar-origin-link" :href="vid.origin" target="_blank">
-						ICON Origin (fix me pls)
-					</a>
+			<div class="vid-actions">
+				<div v-on:click="playVid()">
+					<img class="vid-action-button" src="assets/icons/play.svg" />
 				</div>
-				<div class="sidebar-releaseDate">ICON {{ vid.releaseDate }}</div>
-			</div>
-			<div class="player-actions">
-				<diV>
-					PLAY/PAUSE ICON
-				</diV>
+				<br />
+				<div v-on:click="pauseVid()">
+					<img class="vid-action-button" src="assets/icons/pause.svg" />
+				</div>
 			</div>
 		</div>
 		<div v-on:click="toggleSidebar()" class="sidebar-toggle-button">
@@ -53,6 +59,12 @@
 			toggleSidebar() {
 				this.open = !this.open;
 				PS._store.set('sidebarOpen', this.open);
+			},
+			playVid() {
+				PS._store.get('player').controller.playVideo();
+			},
+			pauseVid() {
+				PS._store.get('player').controller.pauseVideo();
 			}
 		}
 	};
@@ -66,6 +78,7 @@
 		padding: 20px;
 		padding-top: 16px;
 		overflow-x: hidden;
+		overflow-y: hidden;
 		height: 100vh;
 		width: 40vw;
 		max-width: 400px;
@@ -82,6 +95,12 @@
 	.side-bar.closed {
 		transform: translateX(100%);
 		transition: 0.33s cubic-bezier(0.4, 0.34, 0, 0.96);
+	}
+
+	.sidebar-info-container {
+		overflow-x: hidden;
+		height: calc(100vh - 6rem);
+		width: 100%;
 	}
 
 	.sidebar-toggle-button {
@@ -131,16 +150,38 @@
 		text-decoration: none;
 	}
 
-	.side-bar::-webkit-scrollbar {
+	.sidebar-info-container::-webkit-scrollbar {
 		width: 0.5rem;
 	}
 
-	.side-bar::-webkit-scrollbar-track {
+	.sidebar-info-container::-webkit-scrollbar-track {
 		border-radius: 10px;
 	}
 
-	.side-bar::-webkit-scrollbar-thumb {
+	.sidebar-info-container::-webkit-scrollbar-thumb {
 		border-radius: 10px;
 		background: #ffffff55;
+	}
+
+	.vid-actions {
+		position: absolute;
+		bottom: 3.5rem;
+		right: 0px;
+		display: flex;
+		flex-direction: row;
+		height: 3rem;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		width: 100%;
+		cursor: pointer;
+	}
+
+	.vid-action-button {
+		height: 1.5rem;
+	}
+
+	.text-fade {
+		/* background: linear-gradient(transparent 150px, white); */
 	}
 </style>

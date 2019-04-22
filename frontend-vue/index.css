@@ -38,3 +38,7 @@ body {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+.ytp-title {
+  display: none !important;
+}
