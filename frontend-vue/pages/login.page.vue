@@ -3,75 +3,77 @@
 		<div v-bind:class="'nav-button'" v-on:click="$router.push('/')">
 			<img class="nav-button-inner" src="assets/images/nav-logo.svg" />
 		</div>
-		<div v-if="currentForm == 'login'" class="form">
-			<p>Log in to Perpetual Shred</p>
-			<input
-				v-model="loginPayload.email"
-				label="Email"
-				placeholder="your@email.address"
-				v-on:keyup.enter="login"
-			/>
-			<input
-				type="password"
-				v-model="loginPayload.password"
-				label="Password"
-				placeholder="password"
-				v-on:keyup.enter="login"
-			/>
-			<br />
-			<button
-				type="submit"
-				class="form-button"
-				v-on:click="login"
-				:disabled="!(this.loginPayload.email && this.loginPayload.password)"
-			>
-				SEND IT!
-			</button>
-			<br />
-			<a class="form-toggle-button" v-on:click="toggleForm()"
-				>Not registered?</a
-			>
-		</div>
-
-		<div v-if="currentForm == 'register'" class="form">
-			<p>Create a Perpetual Shred account</p>
-			<input
-				v-model="registerPayload.name"
-				label="Username"
-				placeholder="username"
-				v-on:keyup.enter="login"
-			/>
-			<input
-				v-model="registerPayload.email"
-				label="Email"
-				placeholder="your@email.address"
-				v-on:keyup.enter="login"
-			/>
-			<input
-				type="password"
-				v-model="registerPayload.password"
-				label="Password"
-				placeholder="password"
-				v-on:keyup.enter="login"
-			/>
-			<br />
-			<button
-				v-on:click="register"
-				class="form-button"
-				:disabled="
-					!(
-						this.registerPayload.name &&
-						this.registerPayload.email &&
-						this.registerPayload.password
-					)
-				"
-			>
-				SIGN ME UP
-			</button>
-			<a class="form-toggle-button" v-on:click="toggleForm()"
-				>Already have an account?</a
-			>
-		</div>
+		<transition name="fade">
+			<div v-if="currentForm == 'login'" class="form">
+				<p>Log in to Perpetual Shred</p>
+				<input
+					v-model="loginPayload.email"
+					label="Email"
+					placeholder="your@email.address"
+					v-on:keyup.enter="login"
+				/>
+				<input
+					type="password"
+					v-model="loginPayload.password"
+					label="Password"
+					placeholder="password"
+					v-on:keyup.enter="login"
+				/>
+				<br />
+				<button
+					type="submit"
+					class="form-button"
+					v-on:click="login"
+					:disabled="!(this.loginPayload.email && this.loginPayload.password)"
+				>
+					SEND IT!
+				</button>
+				<a class="form-toggle-button" v-on:click="toggleForm()"
+					>Not registered?</a
+				>
+			</div>
+		</transition>
+		<transition name="fade">
+			<div v-if="currentForm == 'register'" class="form">
+				<p>Create a Perpetual Shred account</p>
+				<input
+					v-model="registerPayload.name"
+					label="Username"
+					placeholder="username"
+					v-on:keyup.enter="login"
+				/>
+				<input
+					v-model="registerPayload.email"
+					label="Email"
+					placeholder="your@email.address"
+					v-on:keyup.enter="login"
+				/>
+				<input
+					type="password"
+					v-model="registerPayload.password"
+					label="Password"
+					placeholder="password"
+					v-on:keyup.enter="login"
+				/>
+				<br />
+				<button
+					v-on:click="register"
+					class="form-button"
+					:disabled="
+						!(
+							this.registerPayload.name &&
+							this.registerPayload.email &&
+							this.registerPayload.password
+						)
+					"
+				>
+					SIGN ME UP
+				</button>
+				<a class="form-toggle-button" v-on:click="toggleForm()"
+					>Already have an account?</a
+				>
+			</div>
+		</transition>
 	</div>
 </template>
 
@@ -173,14 +175,14 @@
 
 	.form {
 		display: flex;
-		margin-top: -6rem;
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
+		position: absolute;
 	}
 
 	.form-toggle-button {
-		position: absolute;
+		position: fixed;
 		bottom: 1rem;
 		cursor: pointer;
 	}

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-bind:class="'side-bar ' + (open ? 'open' : 'closed')">
-			<div class="sidebar-info-container text-fade">
+			<div class="sidebar-info-container">
 				<action-bar v-if="vid" v-bind:vid="vid"></action-bar>
 				<div class="sidebar-title">
 					{{ vid.title }}
@@ -179,9 +179,5 @@
 
 	.vid-action-button {
 		height: 1.5rem;
-	}
-
-	.text-fade {
-		/* background: linear-gradient(transparent 150px, white); */
 	}
 </style>
