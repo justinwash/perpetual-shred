@@ -70,15 +70,22 @@
 		overflow: hidden;
 		height: 100vh;
 		color: white;
-		background-color: black;
+		background-image: linear-gradient(
+				to bottom,
+				rgba(0, 0, 0, 0.7) 0%,
+				rgba(0, 0, 0, 0.7) 100%
+			),
+			url('/assets/images/account-bg.jpg');
+		background-position: right;
 		display: flex;
 		flex-direction: row;
 	}
 
 	.favs-header {
-		height: 4.6rem;
+		height: 5.6rem;
 		text-align: center;
 		font-size: 2rem;
+		margin-left: 4rem;
 		padding-top: 2.5rem;
 	}
 
