@@ -150,6 +150,10 @@
 		text-decoration: none;
 	}
 
+	.sidebar-info-container {
+		scrollbar-color: dark;
+		scrollbar-width: thin;
+	}
 	.sidebar-info-container::-webkit-scrollbar {
 		width: 0.5rem;
 	}

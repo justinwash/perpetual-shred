@@ -169,6 +169,11 @@
 		right: 10px;
 	}
 
+	.favs-container {
+		scrollbar-color: dark;
+		scrollbar-width: thin;
+	}
+	
 	.favs-container::-webkit-scrollbar {
 		width: 0.5rem;
 	}
