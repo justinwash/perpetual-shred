@@ -331,3 +331,4 @@ ASALocalRun/
 
 frontend/dist
 backend/config/login.js
+heroku.yml
