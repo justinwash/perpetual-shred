@@ -170,8 +170,9 @@
 	}
 
 	.favs-container {
-		scrollbar-color: dark;
+		scrollbar-color: dark !important;
 		scrollbar-width: thin;
+		overflow-x: hidden;
 	}
 	
 	.favs-container::-webkit-scrollbar {
