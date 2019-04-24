@@ -44,7 +44,7 @@ export default class YouTubeService {
 		const playerApiScript = doc.createElement('script');
 		playerApiScript.type = 'text/javascript';
 		playerApiScript.id = 'youtube-api';
-		playerApiScript.src = 'http://www.youtube.com/iframe_api';
+		playerApiScript.src = 'https://www.youtube.com/iframe_api';
 		doc.body.appendChild(playerApiScript);
 	}
 
