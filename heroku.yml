@@ -4,4 +4,4 @@ build:
 release:
   image: web
   command:
-- echo 'Starting Perpetual Shred!';
+  - echo 'Starting Perpetual Shred!';
