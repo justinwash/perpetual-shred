@@ -5,7 +5,7 @@ const _pbc = new Crawler();
 
 const crawlRouter = express.Router();
 
-crawlRouter.route('/').get(async (req, res) => {
+crawlRouter.route('/').post(async (req, res) => {
 	res.json(await _pbc.crawl());
 });
 

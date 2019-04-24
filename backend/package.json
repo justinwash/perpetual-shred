@@ -4,9 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "npm-run-all -p backend frontend",
-    "backend": "babel-watch server.js",
-    "frontend": "cd ../frontend && npm run start",
+    "start": "babel-watch server.js",
     "dev": "babel-watch server.js --inspect"
   },
   "keywords": [],
