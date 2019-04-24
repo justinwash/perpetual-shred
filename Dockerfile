@@ -22,5 +22,6 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Run it!
+WORKDIR /usr/src/app/backend
 EXPOSE 3000
 CMD [ "npm", "start" ]
