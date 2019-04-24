@@ -38,9 +38,10 @@
 			<div class="account-username">{{ user.name }}</div>
 			<div class="account-role" v-if="user.role === 0">Admin</div>
 			<div class="account-email">{{ user.email }}</div>
-
+			<div class="disclaimer">Please be patient as we build out the new Perpetual Shred.
+				One day there will be togglable settings here</div>
 			<div class="logout-button" v-on:click="logout()">
-				<button>Log Out</button>
+				Log Out
 			</div>
 		</div>
 	</div>
@@ -108,6 +109,11 @@
 		justify-content: flex-start;
 	}
 
+	.disclaimer {
+		font-size: 1.2rem;
+		margin-top: 3rem;
+	}
+
 	.side-bar {
 		position: sticky;
 		flex-shrink: 0;
@@ -123,6 +129,8 @@
 		background-color: rgba(105, 33, 33, 0.7);
 		color: white;
 		text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+		font-size: 2rem;
+
 	}
 
 	.nav-button {
@@ -203,5 +211,10 @@
 	.fav-play-overlay {
 		width: 4rem;
 		opacity: 0.7;
+	}
+
+	.logout-button {
+		cursor: pointer;
+		font-size: 1.2rem;
 	}
 </style>

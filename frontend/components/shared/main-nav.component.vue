@@ -21,16 +21,17 @@
 						src="assets/icons/video-camera.svg"
 					/>Discover Radness
 				</span>
-				<span class="nav-button">
+				<span class="nav-button disabled">
 					<img class="nav-button-icon" src="assets/icons/video-player.svg" />All
 					Videos
 				</span>
-				<span class="nav-button">
+				<span class="nav-button disabled">
 					<img class="nav-button-icon" src="assets/icons/team.svg" />About
 					Perpetual Shred
 				</span>
 			</div>
 		</div>
+		<div class="beta">BETA</div>
 	</div>
 </template>
 
@@ -121,5 +122,19 @@
 		height: 1.8rem;
 		margin-right: 10px;
 		transform: translateY(5px);
+	}
+
+	.disabled {
+		opacity: 0.5;
+		text-decoration: line-through;
+	}
+	.beta {
+		font-size: 2rem;
+		position: fixed;
+		right: 1rem;
+		bottom: 1rem;
+		font-family: sans-serif;
+		color: white;
+		font-weight: bold;
 	}
 </style>
