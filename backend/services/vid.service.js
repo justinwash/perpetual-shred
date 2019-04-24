@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const uri = 'http://localhost:4000';
+const uri = 'https://www.perpetualshred.com/';
 
 class VidService {
 

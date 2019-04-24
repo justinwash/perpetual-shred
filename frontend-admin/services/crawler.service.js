@@ -1,6 +1,6 @@
 export default class CrawlerService {
   constructor () {
-    this.uri = 'http://localhost:4000';
+		this.uri = 'https://www.perpetualshred.com/';
   }
 
   crawl() {

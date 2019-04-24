@@ -1,7 +1,7 @@
 export default class AuthenticationService {
 	constructor () {
 		this.token;
-		this.uri = 'http://localhost:4000';
+		this.uri = 'https://www.perpetualshred.com/';
 	}
 
 	request(method /* 'post' | 'get' */, type /* 'login' | 'register' | 'profile' */, user) {
