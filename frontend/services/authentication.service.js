@@ -1,7 +1,7 @@
 export default class AuthenticationService {
 	constructor () {
 		this.token;
-		this.uri = 'https://www.perpetualshred.com/';
+		this.uri = PS._apiUrl;
 	}
 
 	async request(method /* 'post' | 'get' */, type /* 'login' | 'register' | 'profile' */, user) {

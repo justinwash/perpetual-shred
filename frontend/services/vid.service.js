@@ -1,6 +1,6 @@
 export default class VidService {
 	constructor () {
-		this.uri = 'https://www.perpetualshred.com/';
+		this.uri = PS._apiUrl;
 	}
 
 	getVids() {

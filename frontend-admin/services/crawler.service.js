@@ -1,6 +1,6 @@
 export default class CrawlerService {
   constructor () {
-		this.uri = 'https://www.perpetualshred.com/';
+    this.uri = PS._apiUrl;
   }
 
   crawl() {

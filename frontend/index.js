@@ -6,6 +6,7 @@ import FavService from './services/fav.service.js';
 import ToastService from './services/toast.service.js';
 
 import Store from './services/store.service.js';
+import apiUrl from './environment.js';
 
 /* Routes */
 const router = new VueRouter({
@@ -28,6 +29,7 @@ window.PS = new Vue({
 })
 
 /* Assign global services */
+Object.defineProperty(Vue.prototype, '_apiUrl', { value: apiUrl });
 Object.defineProperty(Vue.prototype, '_authenticationService', { value: new AuthenticationService() });
 Object.defineProperty(Vue.prototype, '_vidService', { value: new VidService() });
 Object.defineProperty(Vue.prototype, '_youtubeService', { value: new YoutubeService() });

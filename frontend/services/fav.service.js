@@ -1,6 +1,6 @@
 export default class FavService {
-	constructor() {
-		this.uri = 'https://www.perpetualshred.com/';
+	constructor () {
+		this.uri = PS._apiUrl;
 	}
 
 	saveFav(vid) {
