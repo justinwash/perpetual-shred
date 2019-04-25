@@ -1,6 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
+import apiUrl from '../environment.js';
 
-const uri = 'https://www.perpetualshred.com/';
+const uri = apiUrl;
 
 class VidService {
 
