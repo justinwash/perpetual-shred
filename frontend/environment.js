@@ -1,3 +1,3 @@
-const apiUrl = 'http://localhost:4000';
+const apiUrl = 'process.env.API_URL || http://localhost:4000';
 
 export default apiUrl;
