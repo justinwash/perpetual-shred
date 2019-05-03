@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 
 frontend/dist
+.local
