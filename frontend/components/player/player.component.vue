@@ -10,12 +10,7 @@
 
 <script>
 	module.exports = {
-		props: ['player', 'vid'],
-		mounted() {
-			this.$nextTick(() => {
-				console.log('tisk tick'); // => 'not updated'
-			});
-		}
+		props: ['player', 'vid']
 	};
 </script>
 

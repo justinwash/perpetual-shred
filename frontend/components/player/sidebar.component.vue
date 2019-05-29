@@ -17,10 +17,14 @@
 				<div class="sidebar-origin-container">
 					<div class="sidebar-origin">
 						<a class="sidebar-origin-link" :href="vid.origin" target="_blank">
-							ICON Origin (fix me pls)
+							<img class="icon-tiny" src="assets/icons/video-player.svg" />
+							Origin
 						</a>
 					</div>
-					<div class="sidebar-releaseDate">ICON {{ vid.releaseDate }}</div>
+					<div class="sidebar-releaseDate">
+						<img class="icon-tiny" src="assets/icons/calendar.svg" />
+						{{ vid.releaseDate }}
+					</div>
 				</div>
 			</div>
 			<div class="vid-actions">
@@ -183,5 +187,11 @@
 
 	.vid-action-button {
 		height: 1.5rem;
+	}
+
+	.icon-tiny {
+		width: 1rem;
+		transform: translateY(2px);
+		margin-right: 5px;
 	}
 </style>

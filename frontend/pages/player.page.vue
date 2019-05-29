@@ -45,7 +45,7 @@
 			} else if (PS._store.get('vid')) {
 				this.setVid(PS._store.get('vid'));
 			} else {
-				this.getRandomVid().then((res) => {
+				this.getRandomVid().then((res, err) => {
 					if (res.data[0]) {
 						this.setVid(res.data[0]);
 					} else
