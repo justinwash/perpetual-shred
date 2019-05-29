@@ -12,11 +12,13 @@ const _vs = new VidService();
 
 class PinkBikeCrawler {
 	async crawl() {
+		console.log('crawling')
 		var home = 'https://www.pinkbike.com/news/videos/';
 		var newsUrls = await this.getNewsUrls(home);
 		var vids = await this.compileYoutubeVids(newsUrls);
 		vids = await this.populateYoutubeInfo(vids);
 		_vs.addVids(await vids);
+		console.log(await vids)
 		return await vids;
 	}
 
@@ -25,14 +27,16 @@ class PinkBikeCrawler {
 			request(url, function (error, response, html) {
 				if (!error) {
 					var $ = cheerio.load(html);
+					console.log($)
 					var newsUrls = [];
 					$('a[class="f22 fgrey4 bold"]').each(function (index, element) {
 						newsUrls.push($(element).attr('href'));
 					});
 					resolve(newsUrls);
+					//console.log(newsUrls)
 				}
 				else {
-					console.log(response);
+					console.log(error);
 				}
 			});
 		});

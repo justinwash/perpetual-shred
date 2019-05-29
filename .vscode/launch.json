@@ -2,18 +2,17 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-				"type": "chrome",
-				"request": "launch",
-				"name": "Chrome",
-				"url": "http://localhost:4200",
-				"webRoot": "${workspaceRoot}/frontend",
-				"breakOnLoad": true
+			"type": "chrome",
+			"request": "launch",
+			"name": "Chrome",
+			"url": "http://localhost:4200",
+			"webRoot": "${workspaceRoot}/frontend",
+			"breakOnLoad": true
 		},
 		{
 			"name": "Debug Frontend",
-			"type": "firefox",
+			"type": "chrome",
 			"request": "launch",
-			"reAttach": true,
 			"url": "http://localhost:4200",
 			"webRoot": "${workspaceFolder}/frontend"
 		},

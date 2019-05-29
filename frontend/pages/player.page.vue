@@ -70,12 +70,7 @@
 		text-align: center;
 	}
 
-	#player {
-		position: absolute;
-		min-height: 100vh;
-		width: 178vh;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+	* {
+		box-sizing: border-box;
 	}
 </style>

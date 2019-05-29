@@ -1,7 +1,7 @@
 <template>
 	<div v-if="player" class="player">
-		<div class="player-outer">
-			<div class="player-inner">
+		<div class="video-background">
+			<div class="video-foreground">
 				<div id="player" class="youtube-player"></div>
 			</div>
 		</div>
@@ -10,8 +10,13 @@
 
 <script>
 	module.exports = {
-		props: ['player', 'vid']
-	}
+		props: ['player', 'vid'],
+		mounted() {
+			this.$nextTick(() => {
+				console.log('tisk tick'); // => 'not updated'
+			});
+		}
+	};
 </script>
 
 <style scoped>
@@ -19,24 +24,19 @@
 		box-sizing: border-box;
 	}
 
-	.player {
-		height: 100%;
-		width: 100%;
-		overflow: hidden;
+	* {
+		box-sizing: border-box;
 	}
-
-	.player-outer {
+	.video-background {
 		background: #000;
 		position: fixed;
 		top: 0;
 		right: 0;
 		bottom: 0;
 		left: 0;
-		z-index: -99;
 	}
-
-	.player-inner,
-	.player-outer iframe {
+	.video-foreground,
+	.video-background iframe {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -46,15 +46,15 @@
 	}
 
 	@media (min-aspect-ratio: 16/9) {
-		.player-inner {
-			height: 300%;
-			top: -100%;
+		.video-foreground {
+			height: 300% !important;
+			top: -100% !important;
 		}
 	}
 	@media (max-aspect-ratio: 16/9) {
-		.player-inner {
-			width: 300%;
-			left: -100%;
+		.video-foreground {
+			width: 300% !important;
+			left: -100% !important;
 		}
 	}
 	@media all and (max-width: 600px) {

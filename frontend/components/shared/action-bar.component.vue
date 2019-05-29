@@ -21,14 +21,16 @@
 		},
 		methods: {
 			isVidFaved() {
-				PS._favService
-					.checkFav(this.vid)
-					.then((res) => {
-						this.faved = res.data;
-					})
-					.catch((err) => {
-						PS._toastService.toast('heartbreak', err);
-					});
+				if (PS._authenticationService.isLoggedIn()) {
+					PS._favService
+						.checkFav(this.vid)
+						.then((res) => {
+							this.faved = res.data;
+						})
+						.catch((err) => {
+							PS._toastService.toast('heartbreak', err);
+						});
+				}
 			},
 			saveFav() {
 				PS._favService
@@ -54,7 +56,12 @@
 					});
 			},
 			toggleFav() {
-				if (this.faved) {
+				if (!PS._authenticationService.isLoggedIn()) {
+					PS._toastService.toast(
+						'heartbreak',
+						'Please log in to favorite this video'
+					);
+				} else if (this.faved) {
 					this.removeFav();
 				} else {
 					this.saveFav();

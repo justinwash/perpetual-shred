@@ -9,6 +9,7 @@ FavController.save = function (req, res) {
 			user.favs.push(req.body.vid)
 			user.save();
 			res.status(200).json(user);
+			if (err) res.status(500).json(err);
 		});
 };
 
@@ -23,6 +24,7 @@ FavController.remove = function (req, res) {
 			else {
 				res.status(200).json(false);
 			}
+			if (err) res.status(500).json(err);
 		});
 };
 
@@ -36,6 +38,7 @@ FavController.check = function (req, res) {
 			else {
 				res.status(200).json(false);
 			}
+			if (err) res.status(500).json(err);
 		});
 };
 
