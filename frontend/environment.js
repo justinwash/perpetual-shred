@@ -1,3 +1,3 @@
-const apiUrl = 'http://localhost:4000';
+const apiUrl = 'https://www.perpetualshred.com';
 
 export default apiUrl;

@@ -330,4 +330,4 @@ ASALocalRun/
 .mfractor/
 
 frontend/dist
-backend/config/login.js
+.local
