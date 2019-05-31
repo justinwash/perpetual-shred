@@ -5,20 +5,30 @@ import mongoose from 'mongoose';
 const AuthenticationController = {};
 
 AuthenticationController.register = function (req, res) {
-	var user = new User();
+	User.findOne({ email: req.body.email.toLowerCase() }, function (err, user) {
+		if (!user) {
+			var user = new User();
 
-	user.name = req.body.name;
-	user.email = req.body.email;
-	user.role = 1;
-	user.setPassword(req.body.password);
+			user.name = req.body.name;
+			user.email = req.body.email.toLowerCase()
+			user.role = 1;
+			user.setPassword(req.body.password);
 
-	user.save(function (err) {
-		var token;
-		token = user.generateJwt();
-		res.status(200);
-		res.json({
-			"token": token
-		});
+			user.save(function (err) {
+				var token;
+				token = user.generateJwt();
+				res.status(200);
+				res.json({
+					"token": token
+				});
+			});
+		}
+		else {
+			res.status(403);
+			res.json({
+				"error": err
+			});
+		}
 	});
 };
 

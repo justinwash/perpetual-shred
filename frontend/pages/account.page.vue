@@ -38,8 +38,10 @@
 			<div class="account-username">{{ user.name }}</div>
 			<div class="account-role" v-if="user.role === 0">Admin</div>
 			<div class="account-email">{{ user.email }}</div>
-			<div class="disclaimer">Please be patient as we build out the new Perpetual Shred.
-				One day there will be togglable settings here</div>
+			<div class="disclaimer">
+				Please be patient as we build out the new Perpetual Shred. One day there
+				will be togglable settings here
+			</div>
 			<div class="logout-button" v-on:click="logout()">
 				Log Out
 			</div>
@@ -92,6 +94,7 @@
 
 	.favs-container {
 		overflow-y: scroll;
+		width: 100%;
 	}
 
 	.favs-list {
@@ -130,7 +133,6 @@
 		color: white;
 		text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
 		font-size: 2rem;
-
 	}
 
 	.nav-button {
@@ -174,7 +176,7 @@
 		scrollbar-width: thin;
 		overflow-x: hidden;
 	}
-	
+
 	.favs-container::-webkit-scrollbar {
 		width: 0.5rem;
 	}
