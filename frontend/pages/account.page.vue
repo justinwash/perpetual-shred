@@ -64,6 +64,14 @@
 				PS._authenticationService.logout();
 				this.$router.push('/');
 			}
+		},
+		mounted: function() {
+			PS._authenticationService.profile().then((res) => {
+				if (res) {
+					this.user = res.data;
+					console.log(this.user);
+				}
+			});
 		}
 	};
 </script>
