@@ -124,6 +124,9 @@
 							this.registerStatus = true;
 							this.validationMessage = false;
 							this.$router.push('/');
+						} else if (res.status === 403) {
+							this.registerStatus = false;
+							PS._toastService.toast('heartbreak', 'Email already in use');
 						} else {
 							this.registerStatus = false;
 							PS._toastService.toast('heartbreak', 'Something went wrong');
