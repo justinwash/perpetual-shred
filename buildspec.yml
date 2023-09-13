@@ -4,15 +4,20 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 376663947856.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
-      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
+      - echo Build started on $(date +%Y-%m-%d)
+      - echo Building the Docker image...
+      - docker build -t perpetual-shred .
+      - docker tag perpetual-shred:latest 376663947856.dkr.ecr.us-east-1.amazonaws.com/perpetual-shred:latest
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo Build completed on $(date +%Y-%m-%d)
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker push 376663947856.dkr.ecr.us-east-1.amazonaws.com/perpetual-shred:latest
+      - printf '[{"name":"perpetual-shred","imageUri":"376663947856.dkr.ecr.us-east-1.amazonaws.com/perpetual-shred:latest"}]' > imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
+  name: perpetual-shred-build-artifact
