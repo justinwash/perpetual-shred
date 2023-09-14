@@ -26,11 +26,11 @@ userDb.once('open', () => {
 	console.log('User database connection established successfully!');
 });
 
-app.use('/', express.static('../frontend'));
 app.use(passport.initialize());
 app.use('/vids', vidsRouter);
 app.use('/crawl', crawlRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
+app.use('/', express.static('../frontend'));
 
 app.listen(process.env.PORT || 4000, () => console.log('Express server running on port 4000'));

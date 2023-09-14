@@ -13,12 +13,12 @@ vidsRouter.route('/').get((req, res) => {
 });
 
 vidsRouter.route('/random').get((req, res) => {
-	Vid.aggregate([{ $sample: { size: 1 } }], (err, vid) => {
-		if (err)
-			console.log(err);
-		else
-			res.json(vid);
-	});
+	Vid.aggregate([{ $sample: { size: 1 } }]).then(vid => {
+		res.json(vid);
+	}).catch(err => {
+		console.log(err);
+		res.status(400).send('Failed to get random vid', err);
+	})
 });
 
 vidsRouter.route('/:id').get((req, res) => {

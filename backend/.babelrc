@@ -1,5 +1,25 @@
 {
-    "presets": [
-        "env"
-    ]
+  "presets": ["env"],
+  "env": {
+    "production": {
+      "plugins": [
+        [
+          "inline-dotenv",
+          {
+            "path": ".env"
+          }
+        ]
+      ]
+    },
+    "development": {
+      "plugins": [
+        [
+          "inline-dotenv",
+          {
+            "path": ".env"
+          }
+        ]
+      ]
+    }
+  }
 }

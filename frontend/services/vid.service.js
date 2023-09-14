@@ -8,7 +8,13 @@ export default class VidService {
 	}
 
 	getRandomVid() {
-		return axios.get(`${this.uri}/vids/random`);
+		console.log('getRandomVid', `${this.uri}/vids/random`);
+		axios.get(`${this.uri}/vids/random`).then(res => {
+			return res;
+		}).catch(err => { 
+			console.log('Error getting random vid: ', err);
+			return err;
+		});
 	}
 
 	getVidById(id) {
