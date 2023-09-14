@@ -17,6 +17,7 @@ export default class YouTubeService {
 					autohide: 1,
 					modestbranding: 1,
 					iv_load_policy: 3,
+					mute: 1
 				},
 				events: {
 					'onStateChange': function (event) {
@@ -30,6 +31,9 @@ export default class YouTubeService {
 								PS._store.player.controller.seekTo(startTime);
 							}
 						}
+					},
+					'onReady': function (event) {
+						PS._store.player.controller.playVideo()
 					}
 				},
 			});
