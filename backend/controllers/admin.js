@@ -14,10 +14,12 @@ AdminController.authenticate = function (req, res) {
 		// Otherwise continue
 		User
 			.findById(req.payload._id)
-			.exec(function (err, user) {
+			.exec().then(user => {
 				if (user.role === 0)
 					res.status(200).json(true);
 				else res.status(200).json(false)
+			}).catch(err => {
+				res.status(500).json(err);
 			});
 	}
 };

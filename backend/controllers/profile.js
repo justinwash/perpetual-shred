@@ -14,8 +14,10 @@ ProfileController.profileRead = function (req, res) {
 		// Otherwise continue
 		User
 			.findById(req.payload._id)
-			.exec(function (err, user) {
+			.exec().then(user => {
 				res.status(200).json(user);
+			}).catch(err => {
+				res.status(500).json(err);
 			});
 	}
 };
