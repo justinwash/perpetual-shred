@@ -6,6 +6,7 @@ const AuthenticationController = {};
 
 AuthenticationController.register = function (req, res) {
 	User.findOne({ email: req.body.email.toLowerCase() }).then(user => {
+		console.log(user);
 		if (!user) {
 			var user = new User();
 
@@ -26,7 +27,7 @@ AuthenticationController.register = function (req, res) {
 		else {
 			res.status(403);
 			res.json({
-				"error": err
+				"error": user
 			});
 		}
 	}).catch(err => {
