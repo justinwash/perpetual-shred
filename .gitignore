@@ -331,3 +331,4 @@ ASALocalRun/
 
 frontend/dist
 .local
+backend/.env
