@@ -45,19 +45,16 @@ module.exports = {
 		} else if (PS._store.get('vid')) {
 			this.setVid(PS._store.get('vid'));
 		} else {
-			this.getRandomVid().then((res, err) => {
+			this.getRandomVid().then(res => {
+				console.log('page getRandomVid: ', res)
 				if (res.data[0]) {
 					this.setVid(res.data[0]);
-					console.log('page getRandomVid: ', this.vid)
-				} else
-					(err) => {
-						console.log(err);
-						this.mounted();
-					};
+				}
+			}).catch(err => {
+				console.log(err);
+				this.mounted();
 			});
 		}
-		console.log('page mounted: ', this.vid);
-		console.log('page mounted: ', this.player);
 	},
 	components: {
 		player: httpVueLoader('../components/player/player.component.vue'),
