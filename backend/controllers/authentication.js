@@ -40,15 +40,16 @@ AuthenticationController.register = function (req, res) {
 AuthenticationController.login = function (req, res) {
 	passport.authenticate('local', function (err, user, info) {
 		var token;
-		console.log(req);
 		// If Passport throws/catches an error
 		if (err) {
+			console.log(err);
 			res.status(404).json(err);
 			return;
 		}
 
 		// If a user is found
 		if (user) {
+			console.log('User Found: ', user);
 			token = user.generateJwt();
 			res.status(200);
 			res.json({
@@ -56,6 +57,7 @@ AuthenticationController.login = function (req, res) {
 			});
 		} else {
 			// If user is not found
+			console.log('User Not Found');
 			res.status(401).json(info);
 		}
 	})(req, res);
