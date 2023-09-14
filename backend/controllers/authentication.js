@@ -15,13 +15,16 @@ AuthenticationController.register = function (req, res) {
 			user.role = 1;
 			user.setPassword(req.body.password);
 
-			user.save(function (err) {
+			user.save().then(user => {
 				var token;
 				token = user.generateJwt();
 				res.status(200);
 				res.json({
 					"token": token
 				});
+			}).catch(err => {
+				console.log(err)
+				res.status(400).send('Failed to create new record');
 			});
 		}
 		else {
