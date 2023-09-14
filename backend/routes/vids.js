@@ -22,11 +22,11 @@ vidsRouter.route('/random').get((req, res) => {
 });
 
 vidsRouter.route('/:id').get((req, res) => {
-	Vid.findById(req.params.id, (err, vid) => {
-		if (err)
-			console.log(err);
-		else
-			res.json(vid);
+	Vid.findById(req.params.id).then(vid => {
+		res.json(vid);
+	}).catch(err => {
+		console.log(err);
+		res.status(400).send('Failed to get vid', err);
 	});
 });
 
@@ -42,7 +42,7 @@ vidsRouter.route('/add').post((req, res) => {
 });
 
 vidsRouter.route('/update/:id').post((req, res) => {
-	Vid.findById(req.params.id, (err, vid) => {
+	Vid.findById(req.params.id).then(vid => {
 		if (!vid)
 			return next(new Error('Could not load document'));
 		else {
@@ -58,15 +58,16 @@ vidsRouter.route('/update/:id').post((req, res) => {
 				res.status(400).send('Update failed');
 			});
 		}
+	}).catch(err => {
+		res.status(400).send('Update failed', err);
 	});
 });
 
 vidsRouter.route('/delete/:id').get((req, res) => {
-	Vid.findByIdAndRemove({ _id: req.params.id }, (err, vid) => {
-		if (err)
-			res.json(err);
-		else
-			res.json('Remove successfully');
+	Vid.findByIdAndRemove({ _id: req.params.id }).then(vid => {
+		res.json('Remove successfully', vid);
+	}).catch(err => {
+		res.status(400).send('Remove failed');
 	});
 });
 
