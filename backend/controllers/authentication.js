@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 const AuthenticationController = {};
 
 AuthenticationController.register = function (req, res) {
-	User.findOne({ email: req.body.email.toLowerCase() }, function (err, user) {
+	User.findOne({ email: req.body.email.toLowerCase() }).then(user => {
 		if (!user) {
 			var user = new User();
 
@@ -29,6 +29,10 @@ AuthenticationController.register = function (req, res) {
 				"error": err
 			});
 		}
+	}).catch(err => {
+		res.status(403);
+		res.json({ "error": err });
+		console.log(err);
 	});
 };
 

@@ -7,70 +7,73 @@
 </template>
 
 <script>
-	module.exports = {
-		data: function() {
-			return {
-				params: this.$route.params,
-				vids: [],
-				vid: null,
-				player: null
-			};
+module.exports = {
+	data: function () {
+		return {
+			params: this.$route.params,
+			vids: [],
+			vid: null,
+			player: null
+		};
+	},
+	methods: {
+		getVid(id) {
+			return PS._vidService.getVidById(id);
 		},
-		methods: {
-			getVid(id) {
-				return PS._vidService.getVidById(id);
-			},
 
-			setVid(vid) {
-				this.vid = vid;
-				PS._store.set('vid', this.vid);
+		setVid(vid) {
+			this.vid = vid;
+			PS._store.set('vid', this.vid);
 
-				this.player = new YoutubePlayer(vid);
-				PS._store.set('player', this.player);
-			},
-
-			getRandomVid() {
-				return PS._vidService.getRandomVid();
-			},
-
-			getVids() {
-				return PS._vidService.getVids();
-			}
+			this.player = new YoutubePlayer(vid);
+			PS._store.set('player', this.player);
 		},
-		mounted() {
-			if (this.params.id) {
-				this.getVid(this.params.id).then((res) => {
-					this.setVid(res.data);
-				});
-			} else if (PS._store.get('vid')) {
-				this.setVid(PS._store.get('vid'));
-			} else {
-				this.getRandomVid().then((res, err) => {
-					if (res.data[0]) {
-						this.setVid(res.data[0]);
-					} else
-						(err) => {
-							console.log(err);
-							this.mounted();
-						};
-				});
-			}
+
+		getRandomVid() {
+			return PS._vidService.getRandomVid();
 		},
-		components: {
-			player: httpVueLoader('../components/player/player.component.vue'),
-			sidebar: httpVueLoader('../components/player/sidebar.component.vue'),
-			navigation: httpVueLoader('../components/shared/main-nav.component.vue')
+
+		getVids() {
+			return PS._vidService.getVids();
 		}
-	};
+	},
+	mounted() {
+		if (this.params.id) {
+			this.getVid(this.params.id).then((res) => {
+				this.setVid(res.data);
+			});
+		} else if (PS._store.get('vid')) {
+			this.setVid(PS._store.get('vid'));
+		} else {
+			this.getRandomVid().then((res, err) => {
+				if (res.data[0]) {
+					this.setVid(res.data[0]);
+					console.log('page getRandomVid: ', this.vid)
+				} else
+					(err) => {
+						console.log(err);
+						this.mounted();
+					};
+			});
+		}
+		console.log('page mounted: ', this.vid);
+		console.log('page mounted: ', this.player);
+	},
+	components: {
+		player: httpVueLoader('../components/player/player.component.vue'),
+		sidebar: httpVueLoader('../components/player/sidebar.component.vue'),
+		navigation: httpVueLoader('../components/shared/main-nav.component.vue')
+	}
+};
 </script>
 
 <style scoped>
-	p {
-		font-size: 2em;
-		text-align: center;
-	}
+p {
+	font-size: 2em;
+	text-align: center;
+}
 
-	* {
-		box-sizing: border-box;
-	}
+* {
+	box-sizing: border-box;
+}
 </style>
