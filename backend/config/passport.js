@@ -6,8 +6,7 @@ passport.use(new Strategy({
 	usernameField: 'email'
 },
 	function (username, password, done) {
-		User.findOne({ email: username.toLowerCase() }, function (err, user) {
-			if (err) { return done(err); }
+		User.findOne({ email: username.toLowerCase() }).then(user => {
 			// Return if user not found in database
 			if (!user) {
 				return done(null, false, {
@@ -22,6 +21,9 @@ passport.use(new Strategy({
 			}
 			// If credentials are correct, return the user object
 			return done(null, user);
+		}).catch(err => {
+			console.log(err);
+			return done(err);
 		});
 	}
 ));
