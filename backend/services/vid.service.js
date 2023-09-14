@@ -1,6 +1,8 @@
 import axios from 'axios';
 import apiUrl from '../environment.js';
 
+import Vid from '../models/Vid';
+
 const uri = apiUrl;
 
 class VidService {
@@ -20,7 +22,15 @@ class VidService {
 	addVids(vids) {
 		for (const vid of vids) {
 			if ((vid.description !== undefined) && (vid.description !== undefined)) {
-				axios.post(`${uri}/vids/add`, vid);
+				Vid.replaceOne(
+					{ _id: vid._id },
+					vid,
+					{ upsert: true }
+				).then(res => {
+					console.log('added or updated vid: ', vid.title)
+				}).catch(err => {
+					console.log(err);
+				});
 			}
 		}
 	}

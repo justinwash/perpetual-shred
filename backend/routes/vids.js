@@ -67,7 +67,7 @@ vidsRouter.route('/delete/:id').get((req, res) => {
 	Vid.findByIdAndRemove({ _id: req.params.id }).then(vid => {
 		res.json('Remove successfully', vid);
 	}).catch(err => {
-		res.status(400).send('Remove failed');
+		res.status(400).send('Remove failed', err);
 	});
 });
 

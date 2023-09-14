@@ -50,6 +50,7 @@ class PinkBikeCrawler {
 			for (const group of vidsByPage) {
 				allVids = allVids.concat(group);
 			}
+			console.log(allVids);
 			resolve(allVids);
 		});
 
@@ -77,20 +78,25 @@ class PinkBikeCrawler {
 	}
 
 	async populateYoutubeInfo(vids) {
-		for (const vid of vids) {
-			var info = await _yt.getYoutubeInfo(vid);
-			if (info !== null) {
-				if (info.description.length > 400)
-					info.description = info.description.substring(0, 400) + '...';
+		try {
+			for (const vid of vids) {
+				var info = await _yt.getYoutubeInfo(vid);
+				if (info !== null) {
+					if (info.description.length > 400)
+						info.description = info.description.substring(0, 400) + '...';
 
-				vid.description = info.description;
-				vid.title = info.title;
-				vid.releaseDate = info.publishedAt.substring(0, 10);
+					vid.description = info.description;
+					vid.title = info.title;
+					vid.releaseDate = info.publishedAt.substring(0, 10);
+				}
 			}
+			console.log('Got details for videos: ', vids);
+			return vids;
 		}
-		return vids;
+		catch (err) {
+			console.log(err);
+		}
 	}
-
 }
 
 

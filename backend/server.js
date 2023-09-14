@@ -10,6 +10,7 @@ import vidsRouter from './routes/vids';
 import crawlRouter from './routes/crawl';
 import userRouter from './routes/user';
 import adminRouter from './routes/admin';
+import PinkBikeCrawler from './crawlers/pinkbike.crawler';
 
 import { appDb, userDb } from './config/mongoose';
 
@@ -34,3 +35,13 @@ app.use('/admin', adminRouter);
 app.use('/', express.static('../frontend'));
 
 app.listen(process.env.PORT || 4000, () => console.log('Express server running on port 4000'));
+
+let crawler = new PinkBikeCrawler();
+
+setInterval(() => {
+	try {
+		crawler.crawl();
+	} catch (err) {
+		console.log(err);
+	}
+}, 1000 * 60 * 60 * 24);
